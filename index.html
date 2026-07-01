@@ -10,6 +10,7 @@
   <style>
     :root {
       --bg: #05070d;
+      --bg-soft: #0b1020;
       --panel: rgba(255, 255, 255, 0.06);
       --panel-border: rgba(255, 255, 255, 0.12);
       --text: #f4f7fb;
@@ -60,11 +61,24 @@
       top: 0;
       z-index: 20;
       backdrop-filter: blur(18px);
-      background: rgba(5, 7, 13, 0.72);
+      background: rgba(5, 7, 13, 0.84);
       border-bottom: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(5, 7, 13, 0.92), rgba(5, 7, 13, 0.72)),
+        url('jxd-header.png') center center / cover no-repeat;
+      opacity: 0.32;
+      pointer-events: none;
     }
 
     .nav {
+      position: relative;
       width: min(100% - 32px, var(--max-width));
       margin: 0 auto;
       min-height: 76px;
@@ -72,19 +86,22 @@
       align-items: center;
       justify-content: space-between;
       gap: 24px;
+      z-index: 1;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
+      min-width: 0;
     }
 
     .brand-mark {
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
       object-fit: contain;
-      filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+      border-radius: 8px;
+      flex-shrink: 0;
     }
 
     .logo {
@@ -93,10 +110,12 @@
       line-height: 1.1;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+      min-width: 0;
     }
 
     .logo strong {
       font-size: 1.1rem;
+      white-space: nowrap;
     }
 
     .logo span {
@@ -104,6 +123,7 @@
       font-size: 0.72rem;
       letter-spacing: 0.18em;
       margin-top: 4px;
+      white-space: nowrap;
     }
 
     .nav-links {
@@ -120,7 +140,7 @@
     .hero {
       min-height: calc(100vh - 76px);
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
+      grid-template-columns: 1.2fr 0.8fr;
       align-items: center;
       gap: 56px;
       padding: 88px 0;
@@ -194,7 +214,7 @@
     .button:hover {
       transform: translateY(-2px);
       border-color: rgba(255, 255, 255, 0.32);
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.10);
     }
 
     .button.primary:hover {
@@ -218,35 +238,44 @@
 
     .visual-card {
       position: relative;
-      min-height: 500px;
+      min-height: 460px;
       border: 1px solid var(--panel-border);
       border-radius: 34px;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(140, 124, 255, 0.34), transparent 34%),
+        radial-gradient(circle at 65% 70%, rgba(0, 208, 255, 0.18), transparent 28%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
       overflow: hidden;
       box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
-      background:
-        linear-gradient(135deg, rgba(5, 7, 13, 0.50), rgba(5, 7, 13, 0.26)),
-        url('jxd-header.png') center center / cover no-repeat;
     }
 
     .visual-card::before {
       content: "";
       position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 30% 35%, rgba(140, 124, 255, 0.16), transparent 28%),
-        radial-gradient(circle at 78% 55%, rgba(0, 208, 255, 0.12), transparent 24%),
-        linear-gradient(180deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.34));
-      pointer-events: none;
+      inset: 12%;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 50%;
+      filter: blur(0.2px);
     }
 
-    .hero-logo {
+    .visual-card::after {
+      content: "JXD";
       position: absolute;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      width: min(78%, 420px);
-      z-index: 2;
-      filter: drop-shadow(0 18px 38px rgba(0, 0, 0, 0.65));
+      font-size: clamp(4rem, 8vw, 7rem);
+      font-weight: 800;
+      letter-spacing: -0.1em;
+      opacity: 0.92;
+    }
+
+    .orbit {
+      position: absolute;
+      inset: 24%;
+      border: 1px solid rgba(140, 124, 255, 0.35);
+      border-radius: 50%;
+      transform: rotate(-18deg) scaleX(1.4);
     }
 
     section {
@@ -376,11 +405,7 @@
       }
 
       .visual-card {
-        min-height: 340px;
-      }
-
-      .hero-logo {
-        width: min(86%, 320px);
+        min-height: 320px;
       }
 
       .section-title {
@@ -400,16 +425,20 @@
 
     @media (max-width: 520px) {
       .brand-mark {
-        width: 36px;
-        height: 36px;
+        width: 34px;
+        height: 34px;
       }
 
       h1 {
         font-size: clamp(3rem, 18vw, 5rem);
       }
 
-      .hero-text {
-        font-size: 1.05rem;
+      .logo strong {
+        font-size: 1rem;
+      }
+
+      .logo span {
+        font-size: 0.66rem;
       }
 
       .buttons {
@@ -470,8 +499,8 @@
         </div>
       </div>
 
-      <div class="visual-card" aria-label="JXD visual artwork">
-        <img class="hero-logo" src="jxd-logo.png" alt="JXD Music logo" />
+      <div class="visual-card" aria-hidden="true">
+        <div class="orbit"></div>
       </div>
     </section>
 
