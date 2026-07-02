@@ -1,1 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <title>Listen to JXD Music | Official Links</title>
+  <meta name="description" content="Official streaming and music platform links for JXD Music." />
+
+  <style>
+    :root {
+      --bg: #05070d;
+      --panel: rgba(255, 255, 255, 0.06);
+      --panel-strong: rgba(255, 255, 255, 0.09);
+      --panel-border: rgba(255, 255, 255, 0.12);
+      --text: #f4f7fb;
+      --muted: #9da8bd;
+      --accent: #8c7cff;
+      --line: rgba(255, 255, 255, 0.12);
+      --max-width: 960px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(140, 124, 255, 0.26), transparent 34%),
+        radial-gradient(circle at 82% 20%, rgba(0, 208, 255, 0.14), transparent 30%),
+        linear-gradient(180deg, #05070d 0%, #080b14 50%, #05070d 100%);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: #05070d;
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('jxd-header.png') center center / cover no-repeat;
+      opacity: 0.95;
+      filter: saturate(1.4) brightness(1.35) contrast(1.1);
+      pointer-events: none;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(5, 7, 13, 0.82) 0%,
+          rgba(5, 7, 13, 0.72) 20%,
+          rgba(5, 7, 13, 0.32) 48%,
+          rgba(5, 7, 13, 0.50) 100%
+        );
+      pointer-events: none;
+    }
+
+    .nav {
+      position: relative;
+      width: min(100% - 32px, 1120px);
+      margin: 0 auto;
+      min-height: 96px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      z-index: 1;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+      padding: 10px 16px 10px 12px;
+      border-radius: 16px;
+      background: rgba(5, 7, 13, 0.56);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+    }
+
+    .brand-mark {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      flex-shrink: 0;
+      filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.55));
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      min-width: 0;
+    }
+
+    .logo strong {
+      font-size: 1.1rem;
+      white-space: nowrap;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+    }
+
+    .logo span {
+      color: #c2cade;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      margin-top: 4px;
+      white-space: nowrap;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      color: #d1d8e8;
+      font-size: 0.92rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    main {
+      width: min(100% - 32px, var(--max-width));
+      margin: 0 auto;
+      padding: 86px 0 96px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: "";
+      width: 42px;
+      height: 1px;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 6.6rem);
+      line-height: 0.92;
+      letter-spacing: -0.07em;
+      margin-bottom: 24px;
+    }
+
+    .intro {
+      max-width: 680px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+    }
+
+    .intro strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 46px;
+    }
+
+    .platform-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      padding: 24px;
+      border-radius: 24px;
+      border: 1px solid var(--panel-border);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(140, 124, 255, 0.16), transparent 28%),
+        linear-gradient(135deg, var(--panel-strong), rgba(255, 255, 255, 0.035));
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .platform-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.32);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(140, 124, 255, 0.24), transparent 28%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.055));
+    }
+
+    .platform-info {
+      min-width: 0;
+    }
+
+    .platform-info h2 {
+      font-size: 1.25rem;
+      margin-bottom: 4px;
+    }
+
+    .platform-info p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .arrow {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--accent), #48c7ff);
+      color: #05070d;
+      font-weight: 800;
+    }
+
+    .note {
+      margin-top: 42px;
+      padding: 24px;
+      border: 1px solid var(--panel-border);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.045);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .back-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 34px;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid var(--panel-border);
+      color: var(--text);
+      background: var(--panel);
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .back-button:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.32);
+      background: rgba(255, 255, 255, 0.10);
+    }
+
+    footer {
+      padding: 34px 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-inner {
+      width: min(100% - 32px, 1120px);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 820px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 18px 0;
+      }
+
+      .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .link-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .brand {
+        width: 100%;
+      }
+
+      .brand-mark {
+        width: 46px;
+        height: 46px;
+      }
+
+      .logo strong {
+        font-size: 1rem;
+      }
+
+      .logo span {
+        font-size: 0.66rem;
+      }
+
+      main {
+        padding-top: 64px;
+      }
+
+      .platform-card {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .arrow {
+        align-self: flex-end;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="nav">
+      <a href="index.html" class="brand" aria-label="JXD Music home">
+        <img class="brand-mark" src="jxd-logo.png" alt="JXD Music logo" />
+        <span class="logo">
+          <strong>JXD Music</strong>
+          <span>Electronic Artist</span>
+        </span>
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html#music">Music</a>
+        <a href="links.html">Links</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#press">Press Kit</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="Official JXD Music links">
+      <div class="eyebrow">Official Links</div>
+
+      <h1>Listen to JXD</h1>
+
+      <p class="intro">
+        <strong>Choose your platform and listen to JXD Music on the official artist channels.</strong>
+        Streams, follows and saves are best placed directly on music platforms.
+      </p>
+    </section>
+
+    <section class="link-grid" aria-label="Music platform links">
+      <a class="platform-card" href="https://open.spotify.com/intl-de/artist/5UjMyxUgDu3lt9puTywpHF" target="_blank" rel="noopener noreferrer">
+        <span class="platform-info">
+          <h2>Spotify</h2>
+          <p>Follow JXD and stream the catalog on Spotify.</p>
+        </span>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="platform-card" href="https://music.apple.com/us/artist/jxd/1758409266" target="_blank" rel="noopener noreferrer">
+        <span class="platform-info">
+          <h2>Apple Music</h2>
+          <p>Listen to JXD on Apple Music.</p>
+        </span>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="platform-card" href="https://www.youtube.com/channel/UCH96NwZPCLYlUyAWj8B4Uag" target="_blank" rel="noopener noreferrer">
+        <span class="platform-info">
+          <h2>YouTube</h2>
+          <p>Official videos, visualizers and music content.</p>
+        </span>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="platform-card" href="https://music.youtube.com/@JXD-Music_JEAN" target="_blank" rel="noopener noreferrer">
+        <span class="platform-info">
+          <h2>YouTube Music</h2>
+          <p>Stream JXD on YouTube Music.</p>
+        </span>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="platform-card" href="https://www.beatport.com/artist/jxd/1173111" target="_blank" rel="noopener noreferrer">
+        <span class="platform-info">
+          <h2>Beatport</h2>
+          <p>Techno, club-oriented releases and electronic tracks.</p>
+        </span>
+        <span class="arrow">↗</span>
+      </a>
+    </section>
+
+    <div class="note">
+      Amazon Music is currently not listed because multiple JXD profiles appear to be merged there.
+      Release-specific smartlinks will be added later where they make sense.
+    </div>
+
+    <div class="back-row">
+      <a class="back-button" href="index.html">Back to Website</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© 2026 JXD Music</span>
+      <span>Official artist links</span>
+    </div>
+  </footer>
+</body>
+</html>
