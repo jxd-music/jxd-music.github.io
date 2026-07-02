@@ -365,6 +365,33 @@
       letter-spacing: 0.08em;
     }
 
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .small-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid var(--panel-border);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.045);
+      font-size: 0.88rem;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .small-link:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.32);
+      background: rgba(255, 255, 255, 0.10);
+    }
+
     .about-text {
       color: var(--muted);
       max-width: 840px;
@@ -482,7 +509,7 @@
 <body>
   <header>
     <nav class="nav">
-      <a href="#" class="brand" aria-label="JXD Music home">
+      <a href="index.html" class="brand" aria-label="JXD Music home">
         <img class="brand-mark" src="jxd-logo.png" alt="JXD Music logo" />
         <span class="logo">
           <strong>JXD Music</strong>
@@ -492,6 +519,7 @@
 
       <div class="nav-links">
         <a href="#music">Music</a>
+        <a href="links.html">Links</a>
         <a href="#about">About</a>
         <a href="#press">Press Kit</a>
         <a href="#contact">Contact</a>
@@ -508,11 +536,11 @@
 
         <p class="hero-text">
           <strong>Electronic music shaped by emotion, atmosphere and cinematic depth.</strong>
-          JXD blends vocal-driven electronica, synthwave, dark pop and immersive sound design into songs that feel intimate, nocturnal and wide open.
+          JXD blends vocal-driven electronica, synthwave, dark pop, techno and immersive sound design into songs that feel intimate, nocturnal and wide open.
         </p>
 
         <div class="buttons">
-          <a class="button primary" href="#music">Listen Now</a>
+          <a class="button primary" href="links.html">Listen Now</a>
           <a class="button" href="#about">Artist Bio</a>
           <a class="button" href="#contact">Contact</a>
         </div>
@@ -521,6 +549,8 @@
           <span>Electronica</span>
           <span>Synthwave</span>
           <span>Dark Pop</span>
+          <span>Techno</span>
+          <span>Trip-Hop</span>
           <span>Cinematic</span>
         </div>
       </div>
@@ -535,27 +565,36 @@
         <h2>Music</h2>
         <p class="section-intro">
           Emotional electronic songs built around atmosphere, melody, harmony and vocal expression.
-          Current releases and selected works will appear here.
+          The website introduces the sound — listening and streaming happens on the official platforms.
         </p>
       </div>
 
       <div class="grid">
         <article class="card">
           <div class="release-placeholder">LATEST</div>
-          <h3>Latest Release</h3>
-          <p>Featured track, cover artwork and streaming links will be added here.</p>
+          <h3>Latest Releases</h3>
+          <p>New tracks, selected releases and current JXD projects across emotional electronic music.</p>
+          <div class="card-actions">
+            <a class="small-link" href="links.html">Stream / Listen</a>
+          </div>
         </article>
 
         <article class="card">
-          <div class="release-placeholder">SONGS</div>
-          <h3>Selected Tracks</h3>
-          <p>A curated selection of JXD tracks across electronica, synth-pop, dark pop and cinematic electronic music.</p>
+          <div class="release-placeholder">ELECTRONIC</div>
+          <h3>Electronica & Dark Pop</h3>
+          <p>Vocal-driven songs with cinematic depth, intimate moods and atmospheric synth production.</p>
+          <div class="card-actions">
+            <a class="small-link" href="links.html">Official Platforms</a>
+          </div>
         </article>
 
         <article class="card">
-          <div class="release-placeholder">VIDEO</div>
-          <h3>Visuals</h3>
-          <p>Music videos, visualizers and atmospheric artwork will be collected in this section.</p>
+          <div class="release-placeholder">TECHNO</div>
+          <h3>Techno & Club Roots</h3>
+          <p>Hypnotic electronic energy, darker grooves and club-oriented tracks from the JXD catalog.</p>
+          <div class="card-actions">
+            <a class="small-link" href="links.html">Listen / Buy</a>
+          </div>
         </article>
       </div>
     </section>
@@ -603,6 +642,9 @@
         <article class="card">
           <h3>Links</h3>
           <p>Streaming platforms, social media profiles and official channels.</p>
+          <div class="card-actions">
+            <a class="small-link" href="links.html">Open Link Hub</a>
+          </div>
         </article>
       </div>
     </section>
