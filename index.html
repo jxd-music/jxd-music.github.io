@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>JXD Music | Electronic Artist</title>
   <meta
     name="description"
@@ -60,7 +61,7 @@
       background-image: url("jxd-header.png");
       background-size: cover;
       background-position: center top;
-      opacity: 0.14;
+      opacity: 0.16;
       mix-blend-mode: screen;
       pointer-events: none;
     }
@@ -87,7 +88,7 @@
       top: 0;
       z-index: 20;
       backdrop-filter: blur(16px);
-      background: linear-gradient(to bottom, rgba(2, 6, 12, 0.82), rgba(2, 6, 12, 0.52));
+      background: linear-gradient(to bottom, rgba(2, 6, 12, 0.92), rgba(2, 6, 12, 0.78));
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
@@ -159,18 +160,39 @@
     }
 
     .hero {
-      padding: 88px 0 54px;
+      min-height: calc(100vh - 82px);
+      padding: 74px 0 96px;
+      display: flex;
+      align-items: center;
     }
 
     .hero-panel {
-      padding: 34px;
+      position: relative;
+      width: 100%;
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      padding: 42px 34px 42px 42px;
       border: 1px solid var(--border);
-      border-radius: 36px;
+      border-radius: 38px;
       background:
+        radial-gradient(circle at 76% 46%, rgba(93, 183, 255, 0.105), transparent 28%),
+        radial-gradient(circle at 92% 22%, rgba(125, 134, 255, 0.09), transparent 25%),
         linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
         rgba(2, 7, 14, 0.62);
-      box-shadow: 0 28px 90px var(--shadow);
+      box-shadow: 0 34px 110px var(--shadow);
       backdrop-filter: blur(18px);
+      overflow: hidden;
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -12% -32% 24%;
+      height: 44%;
+      background: radial-gradient(circle at center, rgba(93, 183, 255, 0.10), transparent 62%);
+      filter: blur(22px);
+      pointer-events: none;
     }
 
     .eyebrow {
@@ -193,14 +215,17 @@
     }
 
     .hero-grid {
+      position: relative;
+      z-index: 2;
+      width: 100%;
       display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-      gap: 28px;
+      grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.05fr);
+      gap: 24px;
       align-items: center;
     }
 
     .hero-copy h1 {
-      font-size: clamp(3.3rem, 8vw, 6.2rem);
+      font-size: clamp(3.6rem, 8vw, 6.4rem);
       line-height: 0.92;
       letter-spacing: -0.08em;
       margin-bottom: 18px;
@@ -208,7 +233,7 @@
     }
 
     .hero-copy p {
-      max-width: 860px;
+      max-width: 760px;
       color: var(--muted);
       font-size: 1.12rem;
       line-height: 1.75;
@@ -254,12 +279,221 @@
       background: rgba(255, 255, 255, 0.1);
     }
 
+    .hero-visual {
+      position: relative;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-orbit {
+      position: relative;
+      width: min(52vw, 680px);
+      min-width: 480px;
+      aspect-ratio: 1.22 / 1;
+      pointer-events: none;
+      opacity: 0.95;
+      transform: translateX(22px);
+    }
+
+    .hero-orbit::before {
+      content: "";
+      position: absolute;
+      inset: 8% 2% 4% 8%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 52% 50%, rgba(93, 183, 255, 0.13), transparent 28%),
+        radial-gradient(circle at 62% 38%, rgba(125, 134, 255, 0.12), transparent 26%),
+        radial-gradient(circle at 38% 64%, rgba(30, 220, 210, 0.06), transparent 24%);
+      filter: blur(18px);
+      opacity: 0.8;
+    }
+
+    .orbit-svg {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .orbit-system-core,
+    .orbit-layer,
+    .orbit-core,
+    .orbit-secondary,
+    .orbit-particles {
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .orbit-haze {
+      animation: orbitHazePulse 9s ease-in-out infinite;
+    }
+
+    .orbit-layer-a {
+      animation: orbitRotateSlow 34s linear infinite;
+    }
+
+    .orbit-layer-b {
+      animation: orbitRotateReverse 46s linear infinite;
+    }
+
+    .orbit-layer-c {
+      animation: orbitRotateDeep 68s linear infinite;
+      opacity: 0.68;
+    }
+
+    .orbit-core {
+      animation: orbitCorePulse 7.5s ease-in-out infinite;
+    }
+
+    .orbit-secondary {
+      animation: orbitSecondaryDrift 11s ease-in-out infinite;
+    }
+
+    .orbit-particles {
+      fill: rgba(137, 212, 255, 0.72);
+      filter: drop-shadow(0 0 8px rgba(93, 183, 255, 0.6));
+    }
+
+    .particle {
+      opacity: 0.45;
+      animation: particleDrift 8s ease-in-out infinite;
+    }
+
+    .particle-1 {
+      animation-delay: -1.2s;
+    }
+
+    .particle-2 {
+      animation-delay: -3.8s;
+      opacity: 0.34;
+    }
+
+    .particle-3 {
+      animation-delay: -5.1s;
+    }
+
+    .particle-4 {
+      animation-delay: -2.4s;
+      opacity: 0.38;
+    }
+
+    .particle-5 {
+      animation-delay: -6.3s;
+      opacity: 0.28;
+    }
+
+    .particle-6 {
+      animation-delay: -4.7s;
+      opacity: 0.3;
+    }
+
+    .particle-7 {
+      animation-delay: -7.1s;
+      opacity: 0.32;
+    }
+
+    @keyframes orbitRotateSlow {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes orbitRotateReverse {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(-360deg);
+      }
+    }
+
+    @keyframes orbitRotateDeep {
+      from {
+        transform: rotate(0deg) scale(1);
+      }
+
+      50% {
+        transform: rotate(180deg) scale(1.025);
+      }
+
+      to {
+        transform: rotate(360deg) scale(1);
+      }
+    }
+
+    @keyframes orbitCorePulse {
+      0%,
+      100% {
+        opacity: 0.72;
+        transform: scale(0.96);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.04);
+      }
+    }
+
+    @keyframes orbitHazePulse {
+      0%,
+      100% {
+        opacity: 0.54;
+      }
+
+      50% {
+        opacity: 0.86;
+      }
+    }
+
+    @keyframes orbitSecondaryDrift {
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0);
+        opacity: 0.72;
+      }
+
+      50% {
+        transform: translate3d(-10px, 8px, 0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes particleDrift {
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0) scale(0.9);
+        opacity: 0.25;
+      }
+
+      45% {
+        transform: translate3d(10px, -8px, 0) scale(1.15);
+        opacity: 0.74;
+      }
+
+      70% {
+        transform: translate3d(-5px, 5px, 0) scale(1);
+        opacity: 0.42;
+      }
+    }
+
     .hero-tags {
+      position: absolute;
+      right: 0;
+      bottom: 14px;
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
       justify-content: flex-end;
-      align-content: flex-start;
+      gap: 12px;
+      max-width: 520px;
+      z-index: 2;
     }
 
     .hero-tag {
@@ -272,10 +506,11 @@
       letter-spacing: 0.04em;
       text-transform: uppercase;
       white-space: nowrap;
+      backdrop-filter: blur(10px);
     }
 
     section.section {
-      padding: 34px 0 10px;
+      padding: 74px 0 10px;
     }
 
     .section-head {
@@ -627,6 +862,34 @@
     }
 
     @media (max-width: 1100px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel {
+        min-height: auto;
+      }
+
+      .hero-visual {
+        min-height: 430px;
+        margin-top: 24px;
+      }
+
+      .hero-orbit {
+        width: min(100%, 620px);
+        min-width: 0;
+        transform: none;
+      }
+
+      .hero-tags {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        justify-content: flex-start;
+        margin-top: 18px;
+        max-width: none;
+      }
+
       .genre-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -643,14 +906,14 @@
         padding: 16px 0;
       }
 
-      .hero-grid,
+      .hero {
+        min-height: auto;
+        padding: 48px 0 76px;
+      }
+
       .section-head,
       .genre-panel-header {
         grid-template-columns: 1fr;
-      }
-
-      .hero-tags {
-        justify-content: flex-start;
       }
     }
 
@@ -661,6 +924,10 @@
 
       .preview-cover {
         width: min(100%, 200px);
+      }
+
+      .hero-visual {
+        min-height: 320px;
       }
     }
 
@@ -681,6 +948,14 @@
       .genre-panel,
       .content-card {
         padding: 20px;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(3.2rem, 18vw, 4.4rem);
+      }
+
+      .hero-orbit {
+        opacity: 0.68;
       }
 
       .genre-card {
@@ -708,8 +983,21 @@
         flex-direction: column;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .orbit-haze,
+      .orbit-layer-a,
+      .orbit-layer-b,
+      .orbit-layer-c,
+      .orbit-core,
+      .orbit-secondary,
+      .particle {
+        animation: none;
+      }
+    }
   </style>
 </head>
+
 <body>
   <header class="site-header">
     <div class="site-header-inner">
@@ -734,11 +1022,12 @@
   <main id="top" class="page">
     <section class="hero">
       <div class="hero-panel">
-        <p class="eyebrow">Official Artist Website</p>
-
         <div class="hero-grid">
           <div class="hero-copy">
+            <p class="eyebrow">Official Artist Website</p>
+
             <h1>JXD Music</h1>
+
             <p>
               Electronic music shaped by emotion, atmosphere and cinematic depth.
               JXD blends vocal-driven electronica, X-pop, techno and immersive
@@ -752,12 +1041,162 @@
             </div>
           </div>
 
-          <div class="hero-tags" aria-label="Key sound worlds">
-            <span class="hero-tag">Electronica</span>
-            <span class="hero-tag">X-Pop</span>
-            <span class="hero-tag">Hypnotic Techno</span>
-            <span class="hero-tag">Melodic Techno</span>
-            <span class="hero-tag">Cinematic</span>
+          <div class="hero-visual" aria-hidden="true">
+            <div class="hero-orbit">
+              <svg class="orbit-svg" viewBox="0 0 760 620" role="img">
+                <defs>
+                  <radialGradient id="orbitCore" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#f4f7ff" stop-opacity="0.95" />
+                    <stop offset="26%" stop-color="#89d4ff" stop-opacity="0.48" />
+                    <stop offset="58%" stop-color="#7d86ff" stop-opacity="0.18" />
+                    <stop offset="100%" stop-color="#7d86ff" stop-opacity="0" />
+                  </radialGradient>
+
+                  <linearGradient id="orbitLine" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#89d4ff" stop-opacity="0" />
+                    <stop offset="18%" stop-color="#89d4ff" stop-opacity="0.36" />
+                    <stop offset="48%" stop-color="#7d86ff" stop-opacity="0.78" />
+                    <stop offset="82%" stop-color="#5db7ff" stop-opacity="0.32" />
+                    <stop offset="100%" stop-color="#89d4ff" stop-opacity="0" />
+                  </linearGradient>
+
+                  <linearGradient id="orbitLineSoft" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#89d4ff" stop-opacity="0" />
+                    <stop offset="45%" stop-color="#89d4ff" stop-opacity="0.32" />
+                    <stop offset="100%" stop-color="#89d4ff" stop-opacity="0" />
+                  </linearGradient>
+
+                  <filter id="softGlow" x="-80%" y="-80%" width="260%" height="260%">
+                    <feGaussianBlur stdDeviation="5" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+
+                  <filter id="deepBlur" x="-80%" y="-80%" width="260%" height="260%">
+                    <feGaussianBlur stdDeviation="14" />
+                  </filter>
+                </defs>
+
+                <g class="orbit-haze">
+                  <ellipse cx="450" cy="310" rx="280" ry="190" fill="rgba(93, 183, 255, 0.055)" filter="url(#deepBlur)" />
+                  <ellipse cx="520" cy="280" rx="210" ry="145" fill="rgba(125, 134, 255, 0.07)" filter="url(#deepBlur)" />
+                  <ellipse cx="390" cy="380" rx="190" ry="120" fill="rgba(30, 220, 210, 0.035)" filter="url(#deepBlur)" />
+                </g>
+
+                <g class="orbit-system-core">
+                  <g class="orbit-layer orbit-layer-a">
+                    <ellipse
+                      cx="430"
+                      cy="315"
+                      rx="295"
+                      ry="92"
+                      fill="none"
+                      stroke="url(#orbitLine)"
+                      stroke-width="1.4"
+                      stroke-dasharray="340 130 90 180"
+                      transform="rotate(-18 430 315)"
+                      filter="url(#softGlow)"
+                    />
+
+                    <ellipse
+                      cx="430"
+                      cy="315"
+                      rx="240"
+                      ry="72"
+                      fill="none"
+                      stroke="url(#orbitLineSoft)"
+                      stroke-width="1"
+                      stroke-dasharray="220 190"
+                      transform="rotate(18 430 315)"
+                    />
+                  </g>
+
+                  <g class="orbit-layer orbit-layer-b">
+                    <ellipse
+                      cx="430"
+                      cy="315"
+                      rx="315"
+                      ry="112"
+                      fill="none"
+                      stroke="url(#orbitLine)"
+                      stroke-width="1.1"
+                      stroke-dasharray="140 220 260 120"
+                      transform="rotate(43 430 315)"
+                      opacity="0.72"
+                    />
+
+                    <ellipse
+                      cx="430"
+                      cy="315"
+                      rx="205"
+                      ry="56"
+                      fill="none"
+                      stroke="rgba(137, 212, 255, 0.18)"
+                      stroke-width="0.9"
+                      stroke-dasharray="80 90"
+                      transform="rotate(-52 430 315)"
+                    />
+                  </g>
+
+                  <g class="orbit-layer orbit-layer-c">
+                    <ellipse
+                      cx="430"
+                      cy="315"
+                      rx="360"
+                      ry="132"
+                      fill="none"
+                      stroke="rgba(137, 212, 255, 0.16)"
+                      stroke-width="0.8"
+                      stroke-dasharray="90 160"
+                      transform="rotate(5 430 315)"
+                    />
+
+                    <ellipse
+                      cx="430"
+                      cy="315"
+                      rx="150"
+                      ry="42"
+                      fill="none"
+                      stroke="rgba(125, 134, 255, 0.22)"
+                      stroke-width="0.75"
+                      stroke-dasharray="60 70"
+                      transform="rotate(76 430 315)"
+                    />
+                  </g>
+                </g>
+
+                <g class="orbit-core">
+                  <circle cx="430" cy="315" r="92" fill="url(#orbitCore)" />
+                  <circle cx="430" cy="315" r="8" fill="rgba(244, 247, 255, 0.88)" filter="url(#softGlow)" />
+                  <circle cx="430" cy="315" r="22" fill="none" stroke="rgba(137, 212, 255, 0.32)" stroke-width="1" />
+                </g>
+
+                <g class="orbit-secondary">
+                  <circle cx="565" cy="240" r="42" fill="rgba(125, 134, 255, 0.16)" filter="url(#deepBlur)" />
+                  <circle cx="565" cy="240" r="4" fill="rgba(137, 212, 255, 0.72)" filter="url(#softGlow)" />
+                </g>
+
+                <g class="orbit-particles">
+                  <circle class="particle particle-1" cx="205" cy="275" r="2.2" />
+                  <circle class="particle particle-2" cx="312" cy="190" r="1.7" />
+                  <circle class="particle particle-3" cx="615" cy="335" r="2.4" />
+                  <circle class="particle particle-4" cx="512" cy="430" r="1.8" />
+                  <circle class="particle particle-5" cx="360" cy="405" r="1.4" />
+                  <circle class="particle particle-6" cx="675" cy="245" r="1.6" />
+                  <circle class="particle particle-7" cx="245" cy="385" r="1.5" />
+                </g>
+              </svg>
+            </div>
+
+            <div class="hero-tags" aria-label="Key sound worlds">
+              <span class="hero-tag">Electronica</span>
+              <span class="hero-tag">X-Pop</span>
+              <span class="hero-tag">Hypnotic Techno</span>
+              <span class="hero-tag">Melodic Techno</span>
+              <span class="hero-tag">Cinematic</span>
+            </div>
           </div>
         </div>
       </div>
