@@ -1,1 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <title>From the Beach Till the Mountain | JXD Music</title>
+  <meta name="description" content="Listen to From the Beach Till the Mountain by JXD on Spotify, Apple Music, Amazon Music, YouTube, YouTube Music and Beatport." />
+
+  <meta property="og:title" content="From the Beach Till the Mountain | JXD Music" />
+  <meta property="og:description" content="Official JXD Smartlink for From the Beach Till the Mountain." />
+  <meta property="og:type" content="music.album" />
+  <meta property="og:image" content="../covers/electronica-xpop/cover-from-the-beach-till-the-mountain.jpg" />
+
+  <style>
+    :root {
+      --bg: #05070d;
+      --panel: rgba(255, 255, 255, 0.06);
+      --panel-strong: rgba(255, 255, 255, 0.10);
+      --border: rgba(255, 255, 255, 0.14);
+      --text: #f5f7ff;
+      --muted: #aeb8cf;
+      --soft: #6f7890;
+      --accent: #8fb7ff;
+      --accent-2: #d8e5ff;
+      --shadow: rgba(0, 0, 0, 0.48);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 16%, rgba(96, 150, 220, 0.22), transparent 34%),
+        radial-gradient(circle at 84% 18%, rgba(70, 190, 160, 0.14), transparent 34%),
+        linear-gradient(145deg, #03050a 0%, #07101a 52%, #03050a 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("../jxd-header.png");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.12;
+      filter: blur(1px);
+      pointer-events: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 34px 0 42px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 54px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      opacity: 0.86;
+      filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.45));
+    }
+
+    .brand-text {
+      line-height: 1.05;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-text span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .back-link {
+      color: var(--muted);
+      font-size: 0.92rem;
+      padding: 11px 15px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+    }
+
+    .back-link:hover {
+      color: var(--text);
+      border-color: rgba(255, 255, 255, 0.28);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .release-card {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 44px;
+      align-items: center;
+      padding: 34px;
+      border: 1px solid var(--border);
+      border-radius: 34px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.035)),
+        rgba(5, 7, 13, 0.74);
+      box-shadow: 0 32px 100px var(--shadow);
+      backdrop-filter: blur(22px);
+    }
+
+    .cover-wrap {
+      position: relative;
+    }
+
+    .cover-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 12%;
+      background: rgba(143, 183, 255, 0.28);
+      filter: blur(46px);
+      z-index: -1;
+    }
+
+    .cover {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2.45rem, 6.2vw, 5.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.07em;
+      margin-bottom: 18px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.12rem;
+      line-height: 1.7;
+      max-width: 650px;
+      margin-bottom: 22px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .pill {
+      color: var(--accent-2);
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      padding: 8px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .player {
+      margin: 0 0 30px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 22px;
+      background: rgba(0, 0, 0, 0.24);
+    }
+
+    .player-label {
+      color: var(--soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    audio {
+      width: 100%;
+      display: block;
+    }
+
+    .links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .platform-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      min-height: 64px;
+      padding: 15px 17px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 20px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.035)),
+        rgba(0, 0, 0, 0.22);
+      transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+    }
+
+    .platform-link:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.32);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.055)),
+        rgba(0, 0, 0, 0.28);
+    }
+
+    .platform-main {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .mini-logo {
+      width: 31px;
+      height: 31px;
+      object-fit: contain;
+      opacity: 0.42;
+      flex: 0 0 auto;
+    }
+
+    .platform-text strong {
+      display: block;
+      font-size: 0.98rem;
+      margin-bottom: 3px;
+    }
+
+    .platform-text span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.78rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 220px;
+    }
+
+    .arrow {
+      color: var(--accent);
+      font-size: 1.15rem;
+      flex: 0 0 auto;
+    }
+
+    .note {
+      color: var(--soft);
+      font-size: 0.86rem;
+      line-height: 1.55;
+      margin-top: 26px;
+    }
+
+    footer {
+      color: var(--soft);
+      font-size: 0.86rem;
+      text-align: center;
+      margin-top: 46px;
+    }
+
+    @media (max-width: 880px) {
+      .release-card {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .cover-wrap {
+        width: min(100%, 430px);
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .page {
+        width: min(100% - 24px, 1120px);
+        padding-top: 22px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 34px;
+      }
+
+      .release-card {
+        padding: 18px;
+        border-radius: 26px;
+      }
+
+      .links {
+        grid-template-columns: 1fr;
+      }
+
+      .platform-text span {
+        max-width: 250px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="topbar">
+      <a class="brand" href="../index.html" aria-label="Back to JXD Music homepage">
+        <img src="../jxd-logo.png" alt="JXD Music logo" />
+        <span class="brand-text">
+          <strong>JXD Music</strong>
+          <span>Official Smartlink</span>
+        </span>
+      </a>
+
+      <a class="back-link" href="../index.html#music">Back to Music</a>
+    </header>
+
+    <section class="release-card" aria-labelledby="release-title">
+      <div class="cover-wrap">
+        <img class="cover" src="../covers/electronica-xpop/cover-from-the-beach-till-the-mountain.jpg" alt="From the Beach Till the Mountain by JXD cover artwork" />
+      </div>
+
+      <div class="release-info">
+        <p class="eyebrow">EP / Extended Play · Uplifting Electronica</p>
+        <h1 id="release-title">From the Beach Till the Mountain</h1>
+
+        <p class="subtitle">
+          An uplifting electronic release by JXD, moving between open landscapes, melodic emotion and cinematic atmosphere.
+        </p>
+
+        <div class="meta" aria-label="Release information">
+          <span class="pill">Artist: JXD</span>
+          <span class="pill">Release Type: EP / Extended Play</span>
+          <span class="pill">Subgenre: Uplifting Electronica</span>
+        </div>
+
+        <div class="player">
+          <p class="player-label">Website Preview</p>
+          <audio controls preload="metadata" src="../audio/electronica-xpop/preview-from-the-beach-till-the-mountain.mp3">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+        <nav class="links" aria-label="Streaming and shop links">
+          <a class="platform-link" href="https://open.spotify.com/intl-de/album/3Xq5sXErX7RqCSp7t5S9Nu" target="_blank" rel="noopener noreferrer">
+            <span class="platform-main">
+              <img class="mini-logo" src="../jxd-logo.png" alt="" aria-hidden="true" />
+              <span class="platform-text">
+                <strong>Spotify</strong>
+                <span>Stream the release</span>
+              </span>
+            </span>
+            <span class="arrow">↗</span>
+          </a>
+
+          <a class="platform-link" href="https://music.apple.com/us/album/from-the-beach-till-the-mountain-single/1894619467" target="_blank" rel="noopener noreferrer">
+            <span class="platform-main">
+              <img class="mini-logo" src="../jxd-logo.png" alt="" aria-hidden="true" />
+              <span class="platform-text">
+                <strong>Apple Music / iTunes</strong>
+                <span>Listen or buy</span>
+              </span>
+            </span>
+            <span class="arrow">↗</span>
+          </a>
+
+          <a class="platform-link" href="https://music.amazon.in/albums/B0GXRVDBCM" target="_blank" rel="noopener noreferrer">
+            <span class="platform-main">
+              <img class="mini-logo" src="../jxd-logo.png" alt="" aria-hidden="true" />
+              <span class="platform-text">
+                <strong>Amazon Music</strong>
+                <span>Stream the release</span>
+              </span>
+            </span>
+            <span class="arrow">↗</span>
+          </a>
+
+          <a class="platform-link" href="https://www.youtube.com/watch?v=XGPzRMsafDs&amp;list=OLAK5uy_n8k8N3Gu3YgEpfSd8WdYMoYblrCHXgonc" target="_blank" rel="noopener noreferrer">
+            <span class="platform-main">
+              <img class="mini-logo" src="../jxd-logo.png" alt="" aria-hidden="true" />
+              <span class="platform-text">
+                <strong>YouTube</strong>
+                <span>Watch on YouTube</span>
+              </span>
+            </span>
+            <span class="arrow">↗</span>
+          </a>
+
+          <a class="platform-link" href="https://music.youtube.com/playlist?list=OLAK5uy_kPd6f-jPcC590_o4PMyvd94IGSoEj60AE" target="_blank" rel="noopener noreferrer">
+            <span class="platform-main">
+              <img class="mini-logo" src="../jxd-logo.png" alt="" aria-hidden="true" />
+              <span class="platform-text">
+                <strong>YouTube Music</strong>
+                <span>Stream the playlist</span>
+              </span>
+            </span>
+            <span class="arrow">↗</span>
+          </a>
+
+          <a class="platform-link" href="https://www.beatport.com/de/release/from-the-beach-till-the-mountain/6829022" target="_blank" rel="noopener noreferrer">
+            <span class="platform-main">
+              <img class="mini-logo" src="../jxd-logo.png" alt="" aria-hidden="true" />
+              <span class="platform-text">
+                <strong>Beatport</strong>
+                <span>Buy / DJ download</span>
+              </span>
+            </span>
+            <span class="arrow">↗</span>
+          </a>
+        </nav>
+
+        <p class="note">
+          Release classification follows the official JXD release logic used on this website.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 JXD Music · Official artist website
+    </footer>
+  </main>
+</body>
+</html>
