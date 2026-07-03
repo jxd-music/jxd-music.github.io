@@ -337,63 +337,64 @@
       gap: 18px;
     }
 
-    .flip-card {
-      min-height: 610px;
-      perspective: 1200px;
-    }
-
-    .flip-card-inner {
+    .music-card {
+      min-height: 360px;
       position: relative;
-      width: 100%;
-      height: 100%;
-      min-height: 610px;
-      transform-style: preserve-3d;
-      transition: transform 0.7s ease;
-    }
-
-    .flip-card.is-flipped .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-
-    .flip-face {
-      position: absolute;
-      inset: 0;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       border: 1px solid var(--panel-border);
       border-radius: 26px;
-      padding: 24px;
-      overflow: visible;
+      padding: 26px;
+      overflow: hidden;
       background:
         radial-gradient(circle at 20% 10%, rgba(140, 124, 255, 0.22), transparent 30%),
         linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035));
       box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25);
-      backface-visibility: hidden;
+      cursor: pointer;
+      text-align: left;
+      color: var(--text);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
 
-    .flip-face::before {
+    .music-card::before {
       content: "";
       position: absolute;
       inset: 0;
-      border-radius: 26px;
       background:
         radial-gradient(circle at 60% 30%, rgba(72, 199, 255, 0.15), transparent 30%),
         radial-gradient(circle at 30% 80%, rgba(140, 124, 255, 0.16), transparent 28%);
       pointer-events: none;
-      overflow: hidden;
     }
 
-    .flip-back {
-      transform: rotateY(180deg);
+    .music-card:hover,
+    .music-card.is-active {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.32);
       background:
-        radial-gradient(circle at 80% 18%, rgba(72, 199, 255, 0.18), transparent 28%),
-        linear-gradient(145deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.04));
+        radial-gradient(circle at 20% 10%, rgba(140, 124, 255, 0.28), transparent 30%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.045));
+    }
+
+    .music-card.is-active {
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.34);
+    }
+
+    .music-card.coming-soon {
+      background:
+        radial-gradient(circle at 50% 20%, rgba(72, 199, 255, 0.22), transparent 30%),
+        radial-gradient(circle at 20% 80%, rgba(140, 124, 255, 0.20), transparent 30%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.04));
+    }
+
+    .music-tag,
+    .music-card-title,
+    .music-card-footer {
+      position: relative;
+      z-index: 1;
     }
 
     .music-tag {
-      position: relative;
-      z-index: 1;
       display: inline-flex;
       align-self: flex-start;
       padding: 6px 11px;
@@ -407,8 +408,6 @@
     }
 
     .music-card-title {
-      position: relative;
-      z-index: 1;
       margin-top: 26px;
     }
 
@@ -425,30 +424,11 @@
     }
 
     .music-card-footer {
-      position: relative;
-      z-index: 1;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      margin-top: 22px;
-    }
-
-    .flip-button {
-      min-height: 40px;
-      padding: 0 15px;
-      border: 1px solid var(--panel-border);
-      border-radius: 999px;
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.06);
-      cursor: pointer;
-      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
-    }
-
-    .flip-button:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255, 255, 255, 0.32);
-      background: rgba(255, 255, 255, 0.11);
+      margin-top: 26px;
     }
 
     .pulse-dot {
@@ -460,21 +440,71 @@
       flex-shrink: 0;
     }
 
-    .preview-list {
-      position: relative;
-      z-index: 1;
+    .open-label {
+      min-height: 40px;
+      padding: 0 15px;
+      border: 1px solid var(--panel-border);
+      border-radius: 999px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .music-detail-panel {
+      margin-top: 28px;
+      border: 1px solid var(--panel-border);
+      border-radius: 30px;
+      padding: 30px;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(140, 124, 255, 0.17), transparent 34%),
+        radial-gradient(circle at 82% 30%, rgba(72, 199, 255, 0.12), transparent 30%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.035));
+      box-shadow: 0 26px 80px rgba(0, 0, 0, 0.30);
+    }
+
+    .music-detail {
+      display: none;
+    }
+
+    .music-detail.is-visible {
+      display: block;
+    }
+
+    .detail-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .detail-head h3 {
+      font-size: clamp(1.7rem, 3vw, 2.8rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .detail-head p {
+      color: var(--muted);
+      max-width: 620px;
+      margin-top: 10px;
+    }
+
+    .track-grid {
       display: grid;
-      gap: 14px;
-      margin: 18px 0;
+      gap: 18px;
     }
 
     .track-preview {
       position: relative;
       display: grid;
-      grid-template-columns: 92px 1fr;
-      gap: 14px;
-      padding: 14px;
-      border-radius: 20px;
+      grid-template-columns: 138px 1fr;
+      gap: 22px;
+      align-items: center;
+      padding: 18px;
+      border-radius: 24px;
       border: 1px solid rgba(255, 255, 255, 0.10);
       background: rgba(5, 7, 13, 0.34);
       overflow: visible;
@@ -483,21 +513,21 @@
     .track-cover-link {
       position: relative;
       z-index: 2;
-      align-self: start;
-      width: 92px;
-      height: 92px;
-      border-radius: 16px;
+      align-self: center;
+      width: 138px;
+      height: 138px;
+      border-radius: 20px;
       outline: none;
     }
 
     .track-cover {
-      width: 92px;
-      height: 92px;
-      border-radius: 16px;
+      width: 138px;
+      height: 138px;
+      border-radius: 20px;
       object-fit: cover;
       border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
-      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      box-shadow: 0 16px 42px rgba(0, 0, 0, 0.38);
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
       transform-origin: left center;
     }
 
@@ -508,9 +538,9 @@
 
     .track-cover-link:hover .track-cover,
     .track-cover-link:focus-visible .track-cover {
-      transform: scale(1.85);
-      border-color: rgba(255, 255, 255, 0.34);
-      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.75);
+      transform: scale(1.52);
+      border-color: rgba(255, 255, 255, 0.38);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.78);
     }
 
     .track-body {
@@ -521,48 +551,46 @@
 
     .track-body strong {
       display: block;
-      font-size: 1rem;
-      line-height: 1.18;
-      margin-bottom: 4px;
+      font-size: 1.25rem;
+      line-height: 1.15;
+      margin-bottom: 6px;
     }
 
     .track-body span {
       display: block;
       color: var(--muted);
-      font-size: 0.84rem;
-      margin-bottom: 10px;
+      font-size: 0.94rem;
+      margin-bottom: 14px;
     }
 
     .track-body audio {
       width: 100%;
-      height: 36px;
+      height: 38px;
       display: block;
     }
 
+    .placeholder-list {
+      display: grid;
+      gap: 14px;
+    }
+
     .preview-item {
-      padding: 14px;
-      border-radius: 16px;
+      padding: 18px;
+      border-radius: 18px;
       border: 1px solid rgba(255, 255, 255, 0.10);
       background: rgba(5, 7, 13, 0.28);
     }
 
     .preview-item strong {
       display: block;
-      font-size: 0.98rem;
+      font-size: 1rem;
       margin-bottom: 3px;
     }
 
     .preview-item span {
       display: block;
       color: var(--muted);
-      font-size: 0.86rem;
-    }
-
-    .coming-soon {
-      background:
-        radial-gradient(circle at 50% 20%, rgba(72, 199, 255, 0.22), transparent 30%),
-        radial-gradient(circle at 20% 80%, rgba(140, 124, 255, 0.20), transparent 30%),
-        linear-gradient(145deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.04));
+      font-size: 0.9rem;
     }
 
     .music-note {
@@ -710,8 +738,32 @@
         gap: 18px;
       }
 
+      .music-grid {
+        grid-template-columns: 1fr;
+      }
+
       .grid {
         grid-template-columns: 1fr;
+      }
+
+      .detail-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .track-preview {
+        grid-template-columns: 112px 1fr;
+      }
+
+      .track-cover-link,
+      .track-cover {
+        width: 112px;
+        height: 112px;
+      }
+
+      .track-cover-link:hover .track-cover,
+      .track-cover-link:focus-visible .track-cover {
+        transform: scale(1.25);
       }
 
       .music-note {
@@ -722,22 +774,6 @@
       .contact-box {
         flex-direction: column;
         align-items: flex-start;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .music-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .flip-card,
-      .flip-card-inner {
-        min-height: 610px;
-      }
-
-      .track-cover-link:hover .track-cover,
-      .track-cover-link:focus-visible .track-cover {
-        transform: scale(1.35);
       }
     }
 
@@ -773,13 +809,19 @@
       }
 
       .track-preview {
-        grid-template-columns: 82px 1fr;
+        grid-template-columns: 1fr;
       }
 
       .track-cover-link,
       .track-cover {
-        width: 82px;
-        height: 82px;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+      }
+
+      .track-cover-link:hover .track-cover,
+      .track-cover-link:focus-visible .track-cover {
+        transform: scale(1.04);
       }
     }
   </style>
@@ -842,226 +884,219 @@
       <div class="section-title">
         <h2>Music</h2>
         <p class="section-intro">
-          Explore the main sound worlds of JXD Music. Selected previews, upcoming releases and official listening links will appear inside each section.
+          Explore the main sound worlds of JXD Music. Select a section to open previews, upcoming releases and official listening links.
         </p>
       </div>
 
       <div class="music-grid">
-        <article class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-face flip-front">
-              <div>
-                <span class="music-tag">Vocal / Electronic</span>
-                <div class="music-card-title">
-                  <h3>Electronica & X-Pop</h3>
-                  <p>
-                    Vocal-driven electronic songs, synth-pop textures, darker moods and trip-hop / lo-fi influence.
-                  </p>
-                </div>
-              </div>
+        <button class="music-card is-active" type="button" data-target="electronica">
+          <div>
+            <span class="music-tag">Vocal / Electronic</span>
+            <div class="music-card-title">
+              <h3>Electronica & X-Pop</h3>
+              <p>
+                Vocal-driven electronic songs, synth-pop textures, darker moods and trip-hop / lo-fi influence.
+              </p>
+            </div>
+          </div>
 
-              <div class="music-card-footer">
-                <span class="pulse-dot" aria-hidden="true"></span>
-                <button class="flip-button" type="button">Open</button>
+          <div class="music-card-footer">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            <span class="open-label">Open</span>
+          </div>
+        </button>
+
+        <button class="music-card" type="button" data-target="hypnotic">
+          <div>
+            <span class="music-tag">Dark / Repetitive</span>
+            <div class="music-card-title">
+              <h3>Hypnotic Techno</h3>
+              <p>
+                Dark, repetitive, driving and trance-like electronic energy with a reduced, focused pulse.
+              </p>
+            </div>
+          </div>
+
+          <div class="music-card-footer">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            <span class="open-label">Open</span>
+          </div>
+        </button>
+
+        <button class="music-card" type="button" data-target="melodic">
+          <div>
+            <span class="music-tag">Atmospheric / Club</span>
+            <div class="music-card-title">
+              <h3>Melodic Techno</h3>
+              <p>
+                Atmospheric techno with melodic tension, emotional movement and wider harmonic space.
+              </p>
+            </div>
+          </div>
+
+          <div class="music-card-footer">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            <span class="open-label">Open</span>
+          </div>
+        </button>
+
+        <button class="music-card coming-soon" type="button" data-target="coming">
+          <div>
+            <span class="music-tag">Unreleased</span>
+            <div class="music-card-title">
+              <h3>Coming Soon</h3>
+              <p>
+                Future JXD releases, unreleased previews and upcoming sound directions.
+              </p>
+            </div>
+          </div>
+
+          <div class="music-card-footer">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            <span class="open-label">Open</span>
+          </div>
+        </button>
+      </div>
+
+      <div class="music-detail-panel">
+        <div class="music-detail is-visible" data-detail="electronica">
+          <div class="detail-head">
+            <div>
+              <h3>Electronica & X-Pop</h3>
+              <p>
+                Selected previews from the vocal-driven, cinematic and atmospheric side of JXD Music.
+              </p>
+            </div>
+            <a class="button primary" href="links.html">Listen on Platforms</a>
+          </div>
+
+          <div class="track-grid">
+            <div class="track-preview">
+              <a class="track-cover-link" href="covers/electronica-xpop/cover-time-moves-through-us.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open Time Moves Through Us cover">
+                <img class="track-cover" src="covers/electronica-xpop/cover-time-moves-through-us.jpg" alt="Time Moves Through Us cover" />
+              </a>
+              <div class="track-body">
+                <strong>Time Moves Through Us</strong>
+                <span>Cinematic Electronica</span>
+                <audio controls preload="none">
+                  <source src="audio/electronica-xpop/preview-time-moves-through-us.mp3" type="audio/mpeg">
+                </audio>
               </div>
             </div>
 
-            <div class="flip-face flip-back">
-              <div>
-                <span class="music-tag">Selected previews</span>
-
-                <div class="preview-list">
-                  <div class="track-preview">
-                    <a class="track-cover-link" href="covers/electronica-xpop/cover-time-moves-through-us.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open Time Moves Through Us cover">
-                      <img class="track-cover" src="covers/electronica-xpop/cover-time-moves-through-us.jpg" alt="Time Moves Through Us cover" />
-                    </a>
-                    <div class="track-body">
-                      <strong>Time Moves Through Us</strong>
-                      <span>Cinematic Electronica</span>
-                      <audio controls preload="none">
-                        <source src="audio/electronica-xpop/preview-time-moves-through-us.mp3" type="audio/mpeg">
-                      </audio>
-                    </div>
-                  </div>
-
-                  <div class="track-preview">
-                    <a class="track-cover-link" href="covers/electronica-xpop/cover-from-the-beach-till-the-mountain.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open From the Beach till the Mountain cover">
-                      <img class="track-cover" src="covers/electronica-xpop/cover-from-the-beach-till-the-mountain.jpg" alt="From the Beach till the Mountain cover" />
-                    </a>
-                    <div class="track-body">
-                      <strong>From the Beach till the Mountain</strong>
-                      <span>Uplifting Electronica</span>
-                      <audio controls preload="none">
-                        <source src="audio/electronica-xpop/preview-from-the-beach-till-the-mountain.mp3" type="audio/mpeg">
-                      </audio>
-                    </div>
-                  </div>
-
-                  <div class="track-preview">
-                    <a class="track-cover-link" href="covers/electronica-xpop/cover-harmonic-silence.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open Harmonic Silence cover">
-                      <img class="track-cover" src="covers/electronica-xpop/cover-harmonic-silence.jpg" alt="Harmonic Silence cover" />
-                    </a>
-                    <div class="track-body">
-                      <strong>Harmonic Silence</strong>
-                      <span>Ambient Electronica</span>
-                      <audio controls preload="none">
-                        <source src="audio/electronica-xpop/preview-harmonic-silence.mp3" type="audio/mpeg">
-                      </audio>
-                    </div>
-                  </div>
-                </div>
+            <div class="track-preview">
+              <a class="track-cover-link" href="covers/electronica-xpop/cover-from-the-beach-till-the-mountain.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open From the Beach till the Mountain cover">
+                <img class="track-cover" src="covers/electronica-xpop/cover-from-the-beach-till-the-mountain.jpg" alt="From the Beach till the Mountain cover" />
+              </a>
+              <div class="track-body">
+                <strong>From the Beach till the Mountain</strong>
+                <span>Uplifting Electronica</span>
+                <audio controls preload="none">
+                  <source src="audio/electronica-xpop/preview-from-the-beach-till-the-mountain.mp3" type="audio/mpeg">
+                </audio>
               </div>
+            </div>
 
-              <div class="music-card-footer">
-                <a class="small-link" href="links.html">Official Links</a>
-                <button class="flip-button" type="button">Back</button>
+            <div class="track-preview">
+              <a class="track-cover-link" href="covers/electronica-xpop/cover-harmonic-silence.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open Harmonic Silence cover">
+                <img class="track-cover" src="covers/electronica-xpop/cover-harmonic-silence.jpg" alt="Harmonic Silence cover" />
+              </a>
+              <div class="track-body">
+                <strong>Harmonic Silence</strong>
+                <span>Ambient Electronica</span>
+                <audio controls preload="none">
+                  <source src="audio/electronica-xpop/preview-harmonic-silence.mp3" type="audio/mpeg">
+                </audio>
               </div>
             </div>
           </div>
-        </article>
+        </div>
 
-        <article class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-face flip-front">
-              <div>
-                <span class="music-tag">Dark / Repetitive</span>
-                <div class="music-card-title">
-                  <h3>Hypnotic Techno</h3>
-                  <p>
-                    Dark, repetitive, driving and trance-like electronic energy with a reduced, focused pulse.
-                  </p>
-                </div>
-              </div>
-
-              <div class="music-card-footer">
-                <span class="pulse-dot" aria-hidden="true"></span>
-                <button class="flip-button" type="button">Open</button>
-              </div>
+        <div class="music-detail" data-detail="hypnotic">
+          <div class="detail-head">
+            <div>
+              <h3>Hypnotic Techno</h3>
+              <p>
+                Dark, focused and repetitive techno previews will be added here.
+              </p>
             </div>
+            <a class="button primary" href="links.html">Listen / Buy</a>
+          </div>
 
-            <div class="flip-face flip-back">
-              <div>
-                <span class="music-tag">Selected previews</span>
-                <div class="preview-list">
-                  <div class="preview-item">
-                    <strong>Preview Slot 01</strong>
-                    <span>Hypnotic techno preview will be added here.</span>
-                  </div>
-                  <div class="preview-item">
-                    <strong>Preview Slot 02</strong>
-                    <span>Driving club-oriented example track.</span>
-                  </div>
-                  <div class="preview-item">
-                    <strong>Preview Slot 03</strong>
-                    <span>Optional darker hypnotic track.</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="music-card-footer">
-                <a class="small-link" href="links.html">Listen / Buy</a>
-                <button class="flip-button" type="button">Back</button>
-              </div>
+          <div class="placeholder-list">
+            <div class="preview-item">
+              <strong>Preview Slot 01</strong>
+              <span>Hypnotic techno preview will be added here.</span>
+            </div>
+            <div class="preview-item">
+              <strong>Preview Slot 02</strong>
+              <span>Driving club-oriented example track.</span>
+            </div>
+            <div class="preview-item">
+              <strong>Preview Slot 03</strong>
+              <span>Optional darker hypnotic track.</span>
             </div>
           </div>
-        </article>
+        </div>
 
-        <article class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-face flip-front">
-              <div>
-                <span class="music-tag">Atmospheric / Club</span>
-                <div class="music-card-title">
-                  <h3>Melodic Techno</h3>
-                  <p>
-                    Atmospheric techno with melodic tension, emotional movement and wider harmonic space.
-                  </p>
-                </div>
-              </div>
-
-              <div class="music-card-footer">
-                <span class="pulse-dot" aria-hidden="true"></span>
-                <button class="flip-button" type="button">Open</button>
-              </div>
+        <div class="music-detail" data-detail="melodic">
+          <div class="detail-head">
+            <div>
+              <h3>Melodic Techno</h3>
+              <p>
+                Atmospheric techno previews with melodic tension and emotional movement will be added here.
+              </p>
             </div>
+            <a class="button primary" href="links.html">Official Links</a>
+          </div>
 
-            <div class="flip-face flip-back">
-              <div>
-                <span class="music-tag">Selected previews</span>
-                <div class="preview-list">
-                  <div class="preview-item">
-                    <strong>Preview Slot 01</strong>
-                    <span>Melodic techno preview will be added here.</span>
-                  </div>
-                  <div class="preview-item">
-                    <strong>Preview Slot 02</strong>
-                    <span>Atmospheric club track example.</span>
-                  </div>
-                  <div class="preview-item">
-                    <strong>Preview Slot 03</strong>
-                    <span>Optional emotional techno track.</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="music-card-footer">
-                <a class="small-link" href="links.html">Official Links</a>
-                <button class="flip-button" type="button">Back</button>
-              </div>
+          <div class="placeholder-list">
+            <div class="preview-item">
+              <strong>Preview Slot 01</strong>
+              <span>Melodic techno preview will be added here.</span>
+            </div>
+            <div class="preview-item">
+              <strong>Preview Slot 02</strong>
+              <span>Atmospheric club track example.</span>
+            </div>
+            <div class="preview-item">
+              <strong>Preview Slot 03</strong>
+              <span>Optional emotional techno track.</span>
             </div>
           </div>
-        </article>
+        </div>
 
-        <article class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-face flip-front coming-soon">
-              <div>
-                <span class="music-tag">Unreleased</span>
-                <div class="music-card-title">
-                  <h3>Coming Soon</h3>
-                  <p>
-                    Future JXD releases, unreleased previews and upcoming sound directions.
-                  </p>
-                </div>
-              </div>
-
-              <div class="music-card-footer">
-                <span class="pulse-dot" aria-hidden="true"></span>
-                <button class="flip-button" type="button">Open</button>
-              </div>
+        <div class="music-detail" data-detail="coming">
+          <div class="detail-head">
+            <div>
+              <h3>Coming Soon</h3>
+              <p>
+                Upcoming tracks, unreleased previews and future JXD releases will appear here.
+              </p>
             </div>
+            <a class="button primary" href="links.html">Follow JXD</a>
+          </div>
 
-            <div class="flip-face flip-back">
-              <div>
-                <span class="music-tag">Upcoming</span>
-                <div class="preview-list">
-                  <div class="preview-item">
-                    <strong>Title TBA</strong>
-                    <span>Upcoming release information will appear here.</span>
-                  </div>
-                  <div class="preview-item">
-                    <strong>Preview soon</strong>
-                    <span>Short unreleased audio teasers can be added later.</span>
-                  </div>
-                  <div class="preview-item">
-                    <strong>Release date TBA</strong>
-                    <span>This section can be updated when a release is scheduled.</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="music-card-footer">
-                <a class="small-link" href="links.html">Follow JXD</a>
-                <button class="flip-button" type="button">Back</button>
-              </div>
+          <div class="placeholder-list">
+            <div class="preview-item">
+              <strong>Title TBA</strong>
+              <span>Upcoming release information will appear here.</span>
+            </div>
+            <div class="preview-item">
+              <strong>Preview soon</strong>
+              <span>Short unreleased audio teasers can be added later.</span>
+            </div>
+            <div class="preview-item">
+              <strong>Release date TBA</strong>
+              <span>This section can be updated when a release is scheduled.</span>
             </div>
           </div>
-        </article>
+        </div>
       </div>
 
       <div class="music-note">
         <p>
-          These sections are designed as curated entry points into the JXD sound. Full releases, new tracks and platform-specific listening options are available through the official links.
+          These sections are curated entry points into the JXD sound. Full releases, new tracks and platform-specific listening options are available through the official links.
         </p>
 
         <a class="button primary" href="links.html">Open Official Links</a>
@@ -1140,19 +1175,30 @@
   </footer>
 
   <script>
-    const flipCards = document.querySelectorAll('.flip-card');
+    const musicCards = document.querySelectorAll('.music-card');
+    const musicDetails = document.querySelectorAll('.music-detail');
+    const audioPlayers = document.querySelectorAll('audio');
 
-    flipCards.forEach((card) => {
-      const buttons = card.querySelectorAll('.flip-button');
+    musicCards.forEach((card) => {
+      card.addEventListener('click', () => {
+        const target = card.dataset.target;
 
-      buttons.forEach((button) => {
-        button.addEventListener('click', () => {
-          card.classList.toggle('is-flipped');
+        musicCards.forEach((item) => {
+          item.classList.remove('is-active');
         });
+
+        musicDetails.forEach((detail) => {
+          detail.classList.remove('is-visible');
+        });
+
+        card.classList.add('is-active');
+
+        const activeDetail = document.querySelector(`[data-detail="${target}"]`);
+        if (activeDetail) {
+          activeDetail.classList.add('is-visible');
+        }
       });
     });
-
-    const audioPlayers = document.querySelectorAll('audio');
 
     audioPlayers.forEach((player) => {
       player.addEventListener('play', () => {
