@@ -338,7 +338,7 @@
     }
 
     .flip-card {
-      min-height: 560px;
+      min-height: 610px;
       perspective: 1200px;
     }
 
@@ -346,7 +346,7 @@
       position: relative;
       width: 100%;
       height: 100%;
-      min-height: 560px;
+      min-height: 610px;
       transform-style: preserve-3d;
       transition: transform 0.7s ease;
     }
@@ -364,7 +364,7 @@
       border: 1px solid var(--panel-border);
       border-radius: 26px;
       padding: 24px;
-      overflow: hidden;
+      overflow: visible;
       background:
         radial-gradient(circle at 20% 10%, rgba(140, 124, 255, 0.22), transparent 30%),
         linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035));
@@ -375,11 +375,13 @@
     .flip-face::before {
       content: "";
       position: absolute;
-      inset: -20%;
+      inset: 0;
+      border-radius: 26px;
       background:
         radial-gradient(circle at 60% 30%, rgba(72, 199, 255, 0.15), transparent 30%),
         radial-gradient(circle at 30% 80%, rgba(140, 124, 255, 0.16), transparent 28%);
       pointer-events: none;
+      overflow: hidden;
     }
 
     .flip-back {
@@ -462,35 +464,64 @@
       position: relative;
       z-index: 1;
       display: grid;
-      gap: 12px;
+      gap: 14px;
       margin: 18px 0;
     }
 
     .track-preview {
+      position: relative;
       display: grid;
-      grid-template-columns: 58px 1fr;
-      gap: 12px;
-      padding: 12px;
-      border-radius: 18px;
+      grid-template-columns: 92px 1fr;
+      gap: 14px;
+      padding: 14px;
+      border-radius: 20px;
       border: 1px solid rgba(255, 255, 255, 0.10);
       background: rgba(5, 7, 13, 0.34);
+      overflow: visible;
+    }
+
+    .track-cover-link {
+      position: relative;
+      z-index: 2;
+      align-self: start;
+      width: 92px;
+      height: 92px;
+      border-radius: 16px;
+      outline: none;
     }
 
     .track-cover {
-      width: 58px;
-      height: 58px;
-      border-radius: 12px;
+      width: 92px;
+      height: 92px;
+      border-radius: 16px;
       object-fit: cover;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      transform-origin: left center;
+    }
+
+    .track-cover-link:hover,
+    .track-cover-link:focus-visible {
+      z-index: 50;
+    }
+
+    .track-cover-link:hover .track-cover,
+    .track-cover-link:focus-visible .track-cover {
+      transform: scale(1.85);
+      border-color: rgba(255, 255, 255, 0.34);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.75);
     }
 
     .track-body {
       min-width: 0;
+      position: relative;
+      z-index: 1;
     }
 
     .track-body strong {
       display: block;
-      font-size: 0.94rem;
+      font-size: 1rem;
       line-height: 1.18;
       margin-bottom: 4px;
     }
@@ -498,13 +529,13 @@
     .track-body span {
       display: block;
       color: var(--muted);
-      font-size: 0.78rem;
-      margin-bottom: 8px;
+      font-size: 0.84rem;
+      margin-bottom: 10px;
     }
 
     .track-body audio {
       width: 100%;
-      height: 34px;
+      height: 36px;
       display: block;
     }
 
@@ -701,7 +732,12 @@
 
       .flip-card,
       .flip-card-inner {
-        min-height: 560px;
+        min-height: 610px;
+      }
+
+      .track-cover-link:hover .track-cover,
+      .track-cover-link:focus-visible .track-cover {
+        transform: scale(1.35);
       }
     }
 
@@ -734,6 +770,16 @@
 
       .button {
         width: 100%;
+      }
+
+      .track-preview {
+        grid-template-columns: 82px 1fr;
+      }
+
+      .track-cover-link,
+      .track-cover {
+        width: 82px;
+        height: 82px;
       }
     }
   </style>
@@ -826,34 +872,40 @@
 
                 <div class="preview-list">
                   <div class="track-preview">
-                    <img class="track-cover" src="cover-time-moves-through-us.jpg" alt="Time Moves Through Us cover" />
+                    <a class="track-cover-link" href="covers/electronica-xpop/cover-time-moves-through-us.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open Time Moves Through Us cover">
+                      <img class="track-cover" src="covers/electronica-xpop/cover-time-moves-through-us.jpg" alt="Time Moves Through Us cover" />
+                    </a>
                     <div class="track-body">
                       <strong>Time Moves Through Us</strong>
-                      <span>Electronica / Cinematic</span>
+                      <span>Cinematic Electronica</span>
                       <audio controls preload="none">
-                        <source src="preview-time-moves-through-us.mp3" type="audio/mpeg">
+                        <source src="audio/electronica-xpop/preview-time-moves-through-us.mp3" type="audio/mpeg">
                       </audio>
                     </div>
                   </div>
 
                   <div class="track-preview">
-                    <img class="track-cover" src="cover-from-the-beach-till-the-mountain.jpg" alt="From the Beach till the Mountain cover" />
+                    <a class="track-cover-link" href="covers/electronica-xpop/cover-from-the-beach-till-the-mountain.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open From the Beach till the Mountain cover">
+                      <img class="track-cover" src="covers/electronica-xpop/cover-from-the-beach-till-the-mountain.jpg" alt="From the Beach till the Mountain cover" />
+                    </a>
                     <div class="track-body">
                       <strong>From the Beach till the Mountain</strong>
-                      <span>Electronica / Atmospheric</span>
+                      <span>Uplifting Electronica</span>
                       <audio controls preload="none">
-                        <source src="preview-from-the-beach-till-the-mountain.mp3" type="audio/mpeg">
+                        <source src="audio/electronica-xpop/preview-from-the-beach-till-the-mountain.mp3" type="audio/mpeg">
                       </audio>
                     </div>
                   </div>
 
                   <div class="track-preview">
-                    <img class="track-cover" src="cover-harmonic-silence.jpg" alt="Harmonic Silence cover" />
+                    <a class="track-cover-link" href="covers/electronica-xpop/cover-harmonic-silence.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open Harmonic Silence cover">
+                      <img class="track-cover" src="covers/electronica-xpop/cover-harmonic-silence.jpg" alt="Harmonic Silence cover" />
+                    </a>
                     <div class="track-body">
                       <strong>Harmonic Silence</strong>
-                      <span>Electronica / Ambient Pop</span>
+                      <span>Ambient Electronica</span>
                       <audio controls preload="none">
-                        <source src="preview-harmonic-silence.mp3" type="audio/mpeg">
+                        <source src="audio/electronica-xpop/preview-harmonic-silence.mp3" type="audio/mpeg">
                       </audio>
                     </div>
                   </div>
@@ -1096,6 +1148,18 @@
       buttons.forEach((button) => {
         button.addEventListener('click', () => {
           card.classList.toggle('is-flipped');
+        });
+      });
+    });
+
+    const audioPlayers = document.querySelectorAll('audio');
+
+    audioPlayers.forEach((player) => {
+      player.addEventListener('play', () => {
+        audioPlayers.forEach((otherPlayer) => {
+          if (otherPlayer !== player) {
+            otherPlayer.pause();
+          }
         });
       });
     });
