@@ -831,6 +831,63 @@
       font-size: 1rem;
     }
 
+    .about-layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 22px;
+    }
+
+    .about-photo-card {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03)),
+        rgba(2, 8, 15, 0.58);
+      box-shadow: 0 20px 56px rgba(0, 0, 0, 0.18);
+    }
+
+    .about-photo-wrap {
+      overflow: hidden;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.22);
+    }
+
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .about-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .about-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 0 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.045);
+      color: var(--muted);
+      font-size: 0.86rem;
+      letter-spacing: 0.03em;
+    }
+
+    .about-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
     .press-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -895,6 +952,7 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .about-detail-grid,
       .press-grid {
         grid-template-columns: 1fr;
       }
@@ -913,7 +971,8 @@
       }
 
       .section-head,
-      .genre-panel-header {
+      .genre-panel-header,
+      .about-layout {
         grid-template-columns: 1fr;
       }
     }
@@ -947,7 +1006,8 @@
 
       .hero-panel,
       .genre-panel,
-      .content-card {
+      .content-card,
+      .about-photo-card {
         padding: 20px;
       }
 
@@ -982,6 +1042,11 @@
 
       .hero-actions {
         flex-direction: column;
+      }
+
+      .about-chip {
+        width: 100%;
+        justify-content: center;
       }
     }
 
@@ -1470,22 +1535,75 @@
       <div class="section-head">
         <h2>About</h2>
         <p>
-          JXD is an electronic music project focused on emotional depth,
-          cinematic atmosphere and vocal-driven songwriting.
+          Artist profile, background and creative direction behind JXD Music.
         </p>
       </div>
 
-      <div class="content-grid">
+      <div class="about-layout">
+        <aside class="about-photo-card">
+          <div class="about-photo-wrap">
+            <img
+              class="about-photo"
+              src="jxd-artist-profile.jpg"
+              alt="JXD artist portrait"
+            />
+          </div>
+
+          <div class="about-meta">
+            <span class="about-chip">JXD / Jean</span>
+            <span class="about-chip">Born 1979</span>
+            <span class="about-chip">Frankfurt, Germany</span>
+            <span class="about-chip">Electronic Artist</span>
+          </div>
+        </aside>
+
         <article class="content-card">
           <h3>Artist Profile</h3>
           <p>
-            JXD creates electronic music that moves between introspection and wide-screen atmosphere.
-            The sound combines synthesizers, textured rhythms, emotional vocals and cinematic production
-            with a clear focus on mood, melody and narrative.
+            JXD is the electronic music project of Jean, born in 1979 in Frankfurt, Germany.
+            Formative techno experiences at the legendary clubs Omen and U60311 during the 1990s
+            left a lasting mark on his musical identity and still shape the project’s connection
+            to electronic music culture today.
           </p>
           <p style="margin-top: 12px;">
-            Rather than treating electronic music only as a club format, JXD explores songs as emotional
-            spaces: dark, luminous, fragile, powerful and deeply human.
+            From those roots, JXD has developed a sound that moves between vocal-driven
+            Electronica, X-Pop, atmospheric Techno and cinematic electronic production.
+            The project combines synthesizers, textured rhythms, intimate vocals and emotional
+            songwriting with a clear focus on atmosphere, melody and depth.
+          </p>
+          <p style="margin-top: 12px;">
+            Rather than treating electronic music only as a club format, JXD builds songs as
+            immersive emotional spaces — reflective, nocturnal, melodic and deeply human.
+          </p>
+        </article>
+      </div>
+
+      <div class="about-detail-grid">
+        <article class="content-card">
+          <h3>Roots</h3>
+          <p>
+            JXD’s foundation reaches from hypnotic underground club techno to broader melodic
+            and cinematic forms of electronic music. That contrast between movement and
+            introspection remains central to the project.
+          </p>
+        </article>
+
+        <article class="content-card">
+          <h3>Sound Identity</h3>
+          <p>
+            The sound ranges from driving, hypnotic energy to emotional, vocal-centered
+            productions. Across all directions, the constant is the same: tension, atmosphere,
+            melody and a distinct emotional center.
+          </p>
+        </article>
+
+        <article class="content-card">
+          <h3>Short Bio</h3>
+          <p>
+            JXD is the electronic music project of Jean from Frankfurt, Germany. Shaped by
+            1990s techno culture and driven by a modern love for emotional songwriting, JXD
+            blends vocal-driven Electronica, X-Pop, atmospheric Techno and cinematic sound
+            design into immersive electronic music.
           </p>
         </article>
       </div>
@@ -1539,7 +1657,7 @@
     </section>
 
     <footer class="footer">
-      © 2026 JXD Music - Official artist website
+      © 2026 JXD Music · Official artist website
     </footer>
   </main>
 
