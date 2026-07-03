@@ -567,6 +567,40 @@
       width: 100%;
       height: 38px;
       display: block;
+      margin-bottom: 14px;
+    }
+
+    .smartlink-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 42px;
+      padding: 7px 16px 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background:
+        linear-gradient(135deg, rgba(5, 7, 13, 0.86), rgba(255, 255, 255, 0.06));
+      color: var(--text);
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.34);
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .smartlink-button:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.34);
+      background:
+        linear-gradient(135deg, rgba(5, 7, 13, 0.96), rgba(140, 124, 255, 0.16));
+    }
+
+    .smartlink-logo {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      flex-shrink: 0;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.55));
     }
 
     .placeholder-list {
@@ -823,6 +857,11 @@
       .track-cover-link:focus-visible .track-cover {
         transform: scale(1.04);
       }
+
+      .smartlink-button {
+        width: 100%;
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -977,36 +1016,48 @@
               </a>
               <div class="track-body">
                 <strong>Time Moves Through Us</strong>
-                <span>Cinematic Electronica</span>
+                <span>Cinematic Electronica · from the album Echos of Time</span>
                 <audio controls preload="none">
                   <source src="audio/electronica-xpop/preview-time-moves-through-us.mp3" type="audio/mpeg">
                 </audio>
+                <a class="smartlink-button" href="releases/echos-of-time.html">
+                  <img class="smartlink-logo" src="jxd-logo.png" alt="" aria-hidden="true" />
+                  <span>JXD Smartlink</span>
+                </a>
               </div>
             </div>
 
             <div class="track-preview">
-              <a class="track-cover-link" href="covers/electronica-xpop/cover-from-the-beach-till-the-mountain.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open From the Beach till the Mountain cover">
-                <img class="track-cover" src="covers/electronica-xpop/cover-from-the-beach-till-the-mountain.jpg" alt="From the Beach till the Mountain cover" />
+              <a class="track-cover-link" href="covers/electronica-xpop/cover-from-the-beach-till-the-mountain.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open From the Beach Till the Mountain cover">
+                <img class="track-cover" src="covers/electronica-xpop/cover-from-the-beach-till-the-mountain.jpg" alt="From the Beach Till the Mountain cover" />
               </a>
               <div class="track-body">
-                <strong>From the Beach till the Mountain</strong>
-                <span>Uplifting Electronica</span>
+                <strong>From the Beach Till the Mountain</strong>
+                <span>Uplifting Electronica · Extended Play by JXD</span>
                 <audio controls preload="none">
                   <source src="audio/electronica-xpop/preview-from-the-beach-till-the-mountain.mp3" type="audio/mpeg">
                 </audio>
+                <a class="smartlink-button" href="releases/from-the-beach-till-the-mountain.html">
+                  <img class="smartlink-logo" src="jxd-logo.png" alt="" aria-hidden="true" />
+                  <span>JXD Smartlink</span>
+                </a>
               </div>
             </div>
 
             <div class="track-preview">
-              <a class="track-cover-link" href="covers/electronica-xpop/cover-harmonic-silence.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open Harmonic Silence cover">
-                <img class="track-cover" src="covers/electronica-xpop/cover-harmonic-silence.jpg" alt="Harmonic Silence cover" />
+              <a class="track-cover-link" href="covers/electronica-xpop/cover-surrender.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open Surrender cover">
+                <img class="track-cover" src="covers/electronica-xpop/cover-surrender.jpg" alt="Surrender cover" />
               </a>
               <div class="track-body">
-                <strong>Harmonic Silence</strong>
-                <span>Ambient Electronica</span>
+                <strong>Surrender</strong>
+                <span>X-Pop / Electronica · Extended Play by JXD</span>
                 <audio controls preload="none">
-                  <source src="audio/electronica-xpop/preview-harmonic-silence.mp3" type="audio/mpeg">
+                  <source src="audio/electronica-xpop/preview-surrender.mp3" type="audio/mpeg">
                 </audio>
+                <a class="smartlink-button" href="releases/surrender.html">
+                  <img class="smartlink-logo" src="jxd-logo.png" alt="" aria-hidden="true" />
+                  <span>JXD Smartlink</span>
+                </a>
               </div>
             </div>
           </div>
@@ -1096,7 +1147,7 @@
 
       <div class="music-note">
         <p>
-          These sections are curated entry points into the JXD sound. Full releases, new tracks and platform-specific listening options are available through the official links.
+          Preview the sound here. Open each JXD Smartlink for full streaming, video and shop options.
         </p>
 
         <a class="button primary" href="links.html">Open Official Links</a>
