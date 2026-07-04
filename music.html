@@ -844,6 +844,11 @@
         rgba(0, 0, 0, 0.26);
     }
 
+    .preview-body {
+      min-width: 0;
+      max-width: 100%;
+    }
+
     .preview-cover {
       width: 144px;
       aspect-ratio: 1 / 1;
@@ -881,6 +886,7 @@
       overflow: hidden;
       isolation: isolate;
       width: 100%;
+      max-width: 100%;
       margin: 0 0 14px;
       padding: 12px;
       border-radius: 18px;
@@ -1550,6 +1556,61 @@
         width: min(100%, 200px);
       }
 
+
+      .preview-card {
+        overflow: hidden;
+      }
+
+      .preview-body,
+      .retro-player,
+      .retro-display,
+      .retro-main,
+      .retro-progress,
+      .smartlink-button {
+        min-width: 0;
+        max-width: 100%;
+      }
+
+      .retro-player {
+        width: 100%;
+        padding: 10px;
+        border-radius: 16px;
+      }
+
+      .retro-display {
+        gap: 7px;
+        padding: 7px 8px;
+      }
+
+      .retro-title {
+        font-size: 0.72rem;
+        letter-spacing: 0.055em;
+      }
+
+      .retro-time {
+        font-size: 0.72rem;
+        letter-spacing: 0.035em;
+      }
+
+      .retro-main {
+        grid-template-columns: 44px minmax(0, 1fr);
+        gap: 10px;
+      }
+
+      .retro-play {
+        width: 44px;
+        height: 40px;
+      }
+
+      .retro-eq {
+        grid-template-columns: repeat(14, 1fr);
+        gap: 2px;
+      }
+
+      .retro-eq .retro-bar:nth-child(n+15) {
+        display: none;
+      }
+
       .hero-visual {
         min-height: 320px;
       }
@@ -1625,6 +1686,18 @@
 
       .genre-card {
         padding: 22px 20px 18px;
+      }
+
+
+      .retro-display {
+        display: grid;
+        grid-template-columns: 8px minmax(0, 1fr);
+        row-gap: 3px;
+      }
+
+      .retro-time {
+        grid-column: 2;
+        margin-left: 0;
       }
 
       .genre-grid {
