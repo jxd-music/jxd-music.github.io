@@ -773,6 +773,7 @@
 
     .genre-panel {
       display: none;
+      scroll-margin-top: 110px;
       padding: 28px 28px 22px;
       border: 1px solid var(--border);
       border-radius: 34px;
@@ -1347,6 +1348,40 @@
       .form-grid {
         grid-template-columns: 1fr;
       }
+
+      .music-reveal-stage {
+        min-height: 230px;
+      }
+
+      .music-idle-panel {
+        min-height: 230px;
+        padding: 30px 20px;
+        border-radius: 28px;
+      }
+
+      .music-idle-panel::after {
+        inset: 16%;
+      }
+
+      .music-idle-content h3 {
+        font-size: clamp(2.15rem, 11vw, 3rem);
+      }
+
+      .music-idle-content p {
+        font-size: 0.98rem;
+        line-height: 1.6;
+      }
+
+      .music-idle-hint {
+        min-height: 40px;
+        margin-top: 18px;
+        padding: 0 16px;
+        font-size: 0.78rem;
+      }
+
+      .genre-panel {
+        scroll-margin-top: 150px;
+      }
     }
 
     @media (max-width: 640px) {
@@ -1385,6 +1420,32 @@
 
       .genre-grid {
         grid-template-columns: 1fr;
+        margin-bottom: 18px;
+      }
+
+      .genre-card p {
+        min-height: auto;
+      }
+
+      .music-reveal-stage {
+        min-height: 200px;
+      }
+
+      .music-idle-panel {
+        min-height: 200px;
+        padding: 24px 16px;
+      }
+
+      .music-reveal-stage.has-selection {
+        min-height: 0;
+      }
+
+      .music-reveal-stage.has-selection .music-idle-panel {
+        margin-bottom: 0;
+      }
+
+      .genre-panel {
+        scroll-margin-top: 154px;
       }
 
       .main-nav {
@@ -1752,6 +1813,8 @@
     const musicRevealStage = document.getElementById("music-reveal-stage");
 
     function activatePanel(panelId) {
+      const selectedPanel = document.getElementById(panelId);
+
       if (musicRevealStage) {
         musicRevealStage.classList.add("has-selection");
       }
@@ -1773,6 +1836,15 @@
           player.pause();
         }
       });
+
+      if (selectedPanel && window.matchMedia("(max-width: 760px)").matches) {
+        window.setTimeout(() => {
+          selectedPanel.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+        }, 180);
+      }
     }
 
     genreCards.forEach((card) => {
@@ -1791,4 +1863,3 @@
   </script>
 </body>
 </html>
-
