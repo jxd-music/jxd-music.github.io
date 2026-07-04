@@ -603,6 +603,130 @@
       font-size: 0.98rem;
     }
 
+    .music-reveal-stage {
+      position: relative;
+      min-height: 360px;
+    }
+
+    .music-idle-panel {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 360px;
+      max-height: 720px;
+      padding: 42px 28px;
+      border: 1px solid var(--border);
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 50% 46%, rgba(93, 183, 255, 0.13), transparent 30%),
+        radial-gradient(circle at 72% 42%, rgba(125, 134, 255, 0.10), transparent 28%),
+        radial-gradient(circle at 32% 74%, rgba(30, 220, 210, 0.045), transparent 26%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+        rgba(2, 8, 15, 0.68);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+      overflow: hidden;
+      text-align: center;
+      transition:
+        opacity 0.55s ease,
+        transform 0.55s ease,
+        max-height 0.55s ease,
+        min-height 0.55s ease,
+        padding 0.55s ease,
+        border-color 0.55s ease,
+        margin 0.55s ease;
+    }
+
+    .music-idle-panel::before,
+    .music-idle-panel::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .music-idle-panel::before {
+      inset: -32%;
+      background:
+        radial-gradient(circle at 30% 50%, rgba(137, 212, 255, 0.13), transparent 24%),
+        radial-gradient(circle at 62% 42%, rgba(125, 134, 255, 0.12), transparent 26%),
+        radial-gradient(circle at 70% 74%, rgba(93, 183, 255, 0.08), transparent 24%);
+      filter: blur(24px);
+      opacity: 0.78;
+      animation: musicFogDrift 18s ease-in-out infinite;
+    }
+
+    .music-idle-panel::after {
+      inset: 11%;
+      border-radius: 50%;
+      border: 1px solid rgba(137, 212, 255, 0.10);
+      box-shadow:
+        inset 0 0 42px rgba(93, 183, 255, 0.05),
+        0 0 48px rgba(93, 183, 255, 0.05);
+      transform: rotate(-12deg);
+      animation: musicSignalSpin 28s linear infinite;
+    }
+
+    .music-idle-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+    }
+
+    .music-idle-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 14px;
+      margin-bottom: 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(137, 212, 255, 0.18);
+      background: rgba(137, 212, 255, 0.06);
+      color: var(--accent-3);
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .music-idle-content h3 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 0.95;
+      letter-spacing: -0.065em;
+      margin-bottom: 14px;
+    }
+
+    .music-idle-content p {
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.7;
+    }
+
+    .music-idle-hint {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      margin-top: 22px;
+      padding: 0 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.045);
+      color: var(--text);
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .music-reveal-stage.has-selection .music-idle-panel {
+      opacity: 0;
+      transform: translateY(-12px) scale(0.985);
+      max-height: 0;
+      min-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-color: transparent;
+      pointer-events: none;
+    }
+
     .genre-panel {
       display: none;
       padding: 28px 28px 22px;
@@ -616,6 +740,7 @@
 
     .genre-panel.is-active {
       display: block;
+      animation: genrePanelReveal 0.55s ease both;
     }
 
     .genre-panel-header {
@@ -780,6 +905,42 @@
       color: var(--soft);
       font-size: 0.92rem;
       line-height: 1.65;
+    }
+
+    @keyframes musicFogDrift {
+      0%, 100% {
+        transform: translate3d(-2%, 1%, 0) scale(1);
+        opacity: 0.62;
+      }
+
+      45% {
+        transform: translate3d(4%, -3%, 0) scale(1.08);
+        opacity: 0.90;
+      }
+
+      72% {
+        transform: translate3d(-4%, 3%, 0) scale(1.04);
+        opacity: 0.74;
+      }
+    }
+
+    @keyframes musicSignalSpin {
+      from { transform: rotate(-12deg) scale(1); }
+      to { transform: rotate(348deg) scale(1); }
+    }
+
+    @keyframes genrePanelReveal {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+        filter: blur(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
     }
 
     .content-grid {
@@ -1213,7 +1374,10 @@
       .orbit-layer-c,
       .orbit-core,
       .orbit-secondary,
-      .particle {
+      .particle,
+      .music-idle-panel::before,
+      .music-idle-panel::after,
+      .genre-panel.is-active {
         animation: none;
       }
     }
@@ -1434,7 +1598,7 @@
       </div>
 
       <div class="genre-grid" role="tablist" aria-label="Music sections">
-        <button class="genre-card is-active" type="button" data-panel="panel-xpop" aria-selected="true">
+        <button class="genre-card" type="button" data-panel="panel-xpop" aria-selected="false">
           <span class="pill">Vocal / Electronic</span>
           <h3>Electronica &amp; X-Pop</h3>
           <p>
@@ -1443,7 +1607,7 @@
           </p>
           <div class="genre-card-footer">
             <span class="genre-dot" aria-hidden="true"></span>
-            <span class="genre-open">Open</span>
+            <span class="genre-open">Reveal</span>
           </div>
         </button>
 
@@ -1456,7 +1620,7 @@
           </p>
           <div class="genre-card-footer">
             <span class="genre-dot" aria-hidden="true"></span>
-            <span class="genre-open">Open</span>
+            <span class="genre-open">Reveal</span>
           </div>
         </button>
 
@@ -1469,7 +1633,7 @@
           </p>
           <div class="genre-card-footer">
             <span class="genre-dot" aria-hidden="true"></span>
-            <span class="genre-open">Open</span>
+            <span class="genre-open">Reveal</span>
           </div>
         </button>
 
@@ -1481,12 +1645,24 @@
           </p>
           <div class="genre-card-footer">
             <span class="genre-dot" aria-hidden="true"></span>
-            <span class="genre-open">Open</span>
+            <span class="genre-open">Reveal</span>
           </div>
         </button>
       </div>
 
-      <div id="panel-xpop" class="genre-panel is-active">
+      <div id="music-reveal-stage" class="music-reveal-stage">
+        <div id="music-idle-panel" class="music-idle-panel" aria-live="polite">
+          <div class="music-idle-content">
+            <span class="music-idle-eyebrow">Hidden Signal Field</span>
+            <h3>Select a Sound World</h3>
+            <p>
+              Choose a section above to reveal previews, releases and official JXD Smartlinks.
+            </p>
+            <span class="music-idle-hint">Reveal the signal</span>
+          </div>
+        </div>
+
+      <div id="panel-xpop" class="genre-panel" aria-hidden="true">
         <div class="genre-panel-header">
           <div>
             <h3>Electronica &amp; X-Pop</h3>
@@ -1568,7 +1744,7 @@
         </p>
       </div>
 
-      <div id="panel-hypnotic" class="genre-panel">
+      <div id="panel-hypnotic" class="genre-panel" aria-hidden="true">
         <div class="genre-panel-header">
           <div>
             <h3>Hypnotic Techno</h3>
@@ -1646,7 +1822,7 @@
         </p>
       </div>
 
-      <div id="panel-melodic" class="genre-panel">
+      <div id="panel-melodic" class="genre-panel" aria-hidden="true">
         <div class="genre-panel-header">
           <div>
             <h3>Melodic Techno</h3>
@@ -1674,7 +1850,7 @@
         </div>
       </div>
 
-      <div id="panel-coming" class="genre-panel">
+      <div id="panel-coming" class="genre-panel" aria-hidden="true">
         <div class="genre-panel-header">
           <div>
             <h3>Coming Soon</h3>
@@ -1700,6 +1876,7 @@
             <span>This section can be updated when a release is scheduled.</span>
           </div>
         </div>
+      </div>
       </div>
     </section>
 
@@ -1893,11 +2070,16 @@
     const genreCards = document.querySelectorAll(".genre-card");
     const genrePanels = document.querySelectorAll(".genre-panel");
     const audioPlayers = document.querySelectorAll("audio");
+    const musicRevealStage = document.getElementById("music-reveal-stage");
     const contactForm = document.getElementById("contact-form");
     const formStatus = document.getElementById("form-status");
     const contactSubmit = document.getElementById("contact-submit");
 
     function activatePanel(panelId) {
+      if (musicRevealStage) {
+        musicRevealStage.classList.add("has-selection");
+      }
+
       genreCards.forEach((card) => {
         const isActive = card.dataset.panel === panelId;
         card.classList.toggle("is-active", isActive);
@@ -1905,7 +2087,9 @@
       });
 
       genrePanels.forEach((panel) => {
-        panel.classList.toggle("is-active", panel.id === panelId);
+        const isActive = panel.id === panelId;
+        panel.classList.toggle("is-active", isActive);
+        panel.setAttribute("aria-hidden", isActive ? "false" : "true");
       });
 
       audioPlayers.forEach((player) => {
