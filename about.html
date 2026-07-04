@@ -1261,6 +1261,67 @@
       display: none;
     }
 
+
+
+    .visual-art-section {
+      margin-top: 28px;
+    }
+
+    .visual-art-card {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1.05fr);
+      gap: 24px;
+      align-items: center;
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(255, 135, 70, 0.10), transparent 28%),
+        radial-gradient(circle at 82% 18%, rgba(93, 183, 255, 0.08), transparent 30%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03)),
+        rgba(2, 8, 15, 0.58);
+      box-shadow: 0 20px 56px rgba(0, 0, 0, 0.18);
+    }
+
+    .visual-art-image-wrap {
+      overflow: hidden;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.28);
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .visual-art-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .visual-art-copy h3 {
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      line-height: 1;
+      letter-spacing: -0.045em;
+      margin-bottom: 14px;
+    }
+
+    .visual-art-copy p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .visual-art-note {
+      display: inline-flex;
+      margin-top: 18px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(137, 212, 255, 0.18);
+      background: rgba(137, 212, 255, 0.06);
+      color: var(--accent-3);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
     .footer {
       padding: 36px 0 54px;
       color: var(--soft);
@@ -1329,6 +1390,11 @@
       .about-layout {
         grid-template-columns: 1fr;
       }
+
+
+      .visual-art-card {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 760px) {
@@ -1366,6 +1432,7 @@
       .genre-panel,
       .content-card,
       .about-photo-card,
+      .visual-art-card,
       .contact-intro-card,
       .contact-form-card {
         padding: 20px;
@@ -1440,6 +1507,7 @@
       </a>
 
       <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
         <a href="music.html">Music</a>
         <a href="links.html">Links</a>
         <a href="about.html" aria-current="page">About</a>
@@ -1450,78 +1518,76 @@
 
   <main id="top" class="page">
     <section id="about" class="section">
-          <div class="section-head">
-            <h2>About</h2>
+      <div class="section-head">
+        <h2>About</h2>
+        <p>
+          Artist profile, creative background and visual art by JXD Music.
+        </p>
+      </div>
+
+      <div class="about-layout">
+        <aside class="about-photo-card">
+          <div class="about-photo-wrap">
+            <img class="about-photo" src="jxd-artist-profile.jpg" alt="JXD artist portrait" />
+          </div>
+
+          <div class="about-meta">
+            <span class="about-chip">JXD / Jean</span>
+            <span class="about-chip">Born 1979</span>
+            <span class="about-chip">Frankfurt, Germany</span>
+            <span class="about-chip">Electronic Artist</span>
+          </div>
+        </aside>
+
+        <article class="content-card">
+          <h3>Artist Profile</h3>
+          <p>
+            JXD is the electronic music project of Jean, born in 1979 in Frankfurt, Germany.
+            Driven by a deep lifelong passion for electronic music, JXD creates sound worlds
+            between vocal-driven Electronica, X-Pop, Hypnotic Techno, atmospheric Techno and
+            cinematic electronic production.
+          </p>
+          <p style="margin-top: 12px;">
+            The project combines synthesizers, textured rhythms, intimate vocals and emotional
+            songwriting with a clear focus on atmosphere, melody, tension and depth. Across all
+            directions, the emotional center remains the same: music as an immersive space —
+            reflective, nocturnal, rhythmic and deeply human.
+          </p>
+          <p style="margin-top: 12px;">
+            JXD works with Fender Studio Pro, Synthesizer V and custom composition tools as part
+            of an evolving creative workflow.
+          </p>
+        </article>
+      </div>
+
+      <section class="visual-art-section" aria-label="Visual Art by JXD">
+        <div class="section-head">
+          <h2>Visual Art</h2>
+          <p>
+            Paintings and visual works as another part of Jean’s creative language.
+          </p>
+        </div>
+
+        <article class="visual-art-card">
+          <div class="visual-art-image-wrap">
+            <img class="visual-art-image" src="art/jxd-trees-tobias-station-2-2.jpeg" alt="Visual artwork by Jean / JXD showing expressive abstract trees" />
+          </div>
+
+          <div class="visual-art-copy">
+            <h3>Art &amp; Sound</h3>
             <p>
-              Artist profile, background and creative direction behind JXD Music.
+              Alongside music production, Jean also creates visual artwork under the JXD identity.
+              The paintings extend the same emotional field as the music: organic forms, inner
+              landscapes, movement, tension and release.
+            </p>
+            <p class="visual-art-note">
+              Note: A gift for my friend Tobias on Station 2.2.
             </p>
           </div>
-    
-          <div class="about-layout">
-            <aside class="about-photo-card">
-              <div class="about-photo-wrap">
-                <img class="about-photo" src="jxd-artist-profile.jpg" alt="JXD artist portrait" />
-              </div>
-    
-              <div class="about-meta">
-                <span class="about-chip">JXD / Jean</span>
-                <span class="about-chip">Born 1979</span>
-                <span class="about-chip">Frankfurt, Germany</span>
-                <span class="about-chip">Electronic Artist</span>
-              </div>
-            </aside>
-    
-            <article class="content-card">
-              <h3>Artist Profile</h3>
-              <p>
-                JXD is the electronic music project of Jean, born in 1979 in Frankfurt, Germany.
-                Formative techno experiences at the legendary clubs Omen and U60311 during the 1990s
-                left a lasting mark on his musical identity and still shape the project’s connection
-                to electronic music culture today.
-              </p>
-              <p style="margin-top: 12px;">
-                From those roots, JXD has developed a sound that moves between vocal-driven
-                Electronica, X-Pop, atmospheric Techno and cinematic electronic production.
-                The project combines synthesizers, textured rhythms, intimate vocals and emotional
-                songwriting with a clear focus on atmosphere, melody and depth.
-              </p>
-              <p style="margin-top: 12px;">
-                Rather than treating electronic music only as a club format, JXD builds songs as
-                immersive emotional spaces — reflective, nocturnal, melodic and deeply human.
-              </p>
-            </article>
-          </div>
-    
-          <div class="about-detail-grid">
-            <article class="content-card">
-              <h3>Roots</h3>
-              <p>
-                JXD’s foundation reaches from hypnotic underground club techno to broader melodic
-                and cinematic forms of electronic music. That contrast between movement and
-                introspection remains central to the project.
-              </p>
-            </article>
-    
-            <article class="content-card">
-              <h3>Sound Identity</h3>
-              <p>
-                The sound ranges from driving, hypnotic energy to emotional, vocal-centered
-                productions. Across all directions, the constant is the same: tension, atmosphere,
-                melody and a distinct emotional center.
-              </p>
-            </article>
-    
-            <article class="content-card">
-              <h3>Short Bio</h3>
-              <p>
-                JXD is the electronic music project of Jean from Frankfurt, Germany. Shaped by
-                1990s techno culture and driven by a modern love for emotional songwriting, JXD
-                blends vocal-driven Electronica, X-Pop, atmospheric Techno and cinematic sound
-                design into immersive electronic music.
-              </p>
-            </article>
-          </div>
-        </section>
+        </article>
+      </section>
+    </section>
+
     <footer class="footer">
       © 2026 JXD Music - Official artist website
     </footer>
@@ -1529,4 +1595,3 @@
 
 </body>
 </html>
-
