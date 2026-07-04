@@ -691,6 +691,101 @@
         animation: none;
       }
     }
+
+
+    .ambient-signal {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 60;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 0 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(137, 212, 255, 0.18);
+      background:
+        radial-gradient(circle at 16% 40%, rgba(190, 70, 255, 0.16), transparent 38%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035)),
+        rgba(2, 8, 15, 0.82);
+      color: var(--text);
+      font: inherit;
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow:
+        0 14px 34px rgba(0, 0, 0, 0.32),
+        0 0 28px rgba(125, 134, 255, 0.08);
+      backdrop-filter: blur(14px);
+      transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .ambient-signal:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 90, 180, 0.30);
+      background:
+        radial-gradient(circle at 16% 40%, rgba(190, 70, 255, 0.22), transparent 38%),
+        radial-gradient(circle at 84% 50%, rgba(93, 183, 255, 0.10), transparent 34%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.045)),
+        rgba(4, 10, 18, 0.88);
+      box-shadow:
+        0 16px 38px rgba(0, 0, 0, 0.36),
+        0 0 30px rgba(255, 80, 170, 0.10);
+    }
+
+    .ambient-signal-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(126, 138, 167, 0.75);
+      box-shadow: 0 0 0 rgba(137, 212, 255, 0);
+      flex: 0 0 auto;
+      transition: background 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .ambient-signal.is-active .ambient-signal-dot {
+      background: var(--accent-3);
+      box-shadow:
+        0 0 14px rgba(137, 212, 255, 0.70),
+        0 0 26px rgba(255, 80, 170, 0.26);
+      animation: ambientSignalPulse 2.8s ease-in-out infinite;
+    }
+
+    .ambient-signal.is-unavailable {
+      color: var(--soft);
+      border-color: rgba(255, 179, 179, 0.18);
+    }
+
+    @keyframes ambientSignalPulse {
+      0%, 100% {
+        transform: scale(0.86);
+        opacity: 0.72;
+      }
+
+      50% {
+        transform: scale(1.12);
+        opacity: 1;
+      }
+    }
+
+
+    @media (max-width: 640px) {
+
+      .ambient-signal {
+        right: 12px;
+        bottom: 12px;
+        max-width: calc(100% - 24px);
+        min-height: 42px;
+        padding: 0 13px;
+        font-size: 0.74rem;
+        letter-spacing: 0.04em;
+      }
+
+    }
+
   </style>
 </head>
 
@@ -714,6 +809,13 @@
       </nav>
     </div>
   </header>
+
+  <audio id="ambient-audio" data-ambient-audio loop preload="metadata" src="audio/ambient/jxd-ambient-signal.mp3"></audio>
+  <button id="ambient-signal" class="ambient-signal" type="button" aria-pressed="false">
+    <span class="ambient-signal-dot" aria-hidden="true"></span>
+    <span class="ambient-signal-text">Activate Ambient Signal</span>
+  </button>
+
 
   <main id="top" class="page">
     <section class="hero">
@@ -901,6 +1003,111 @@
       © 2026 JXD Music - Official artist website
     </footer>
   </main>
+
+
+
+  <script>
+    (() => {
+      const ambientAudio = document.getElementById("ambient-audio");
+      const ambientButton = document.getElementById("ambient-signal");
+      const ambientText = ambientButton?.querySelector(".ambient-signal-text");
+      const AMBIENT_KEY = "jxdAmbientSignal";
+      const AMBIENT_VOLUME = 0.10;
+
+      if (!ambientAudio || !ambientButton || !ambientText) return;
+
+      ambientAudio.volume = AMBIENT_VOLUME;
+
+      function previewAudios() {
+        return Array.from(document.querySelectorAll("audio:not([data-ambient-audio])"));
+      }
+
+      function setButtonState(state) {
+        ambientButton.classList.toggle("is-active", state === "active");
+        ambientButton.classList.toggle("is-unavailable", state === "unavailable");
+        ambientButton.setAttribute("aria-pressed", state === "active" ? "true" : "false");
+
+        if (state === "active") {
+          ambientText.textContent = "Ambient Signal Active";
+        } else if (state === "unavailable") {
+          ambientText.textContent = "Ambient Signal Unavailable";
+        } else {
+          ambientText.textContent = "Activate Ambient Signal";
+        }
+      }
+
+      async function startAmbient() {
+        try {
+          previewAudios().forEach((audio) => audio.pause());
+          await ambientAudio.play();
+          localStorage.setItem(AMBIENT_KEY, "active");
+          setButtonState("active");
+        } catch (error) {
+          setButtonState(ambientAudio.error ? "unavailable" : "inactive");
+        }
+      }
+
+      function stopAmbient({ remember = true } = {}) {
+        ambientAudio.pause();
+        if (remember) localStorage.setItem(AMBIENT_KEY, "silent");
+        setButtonState("inactive");
+      }
+
+      function resumeAmbientIfEnabled() {
+        const enabled = localStorage.getItem(AMBIENT_KEY) === "active";
+        const anyPreviewPlaying = previewAudios().some((audio) => !audio.paused && !audio.ended);
+        if (enabled && !anyPreviewPlaying) {
+          startAmbient();
+        }
+      }
+
+      ambientButton.addEventListener("click", () => {
+        if (ambientAudio.paused) {
+          startAmbient();
+        } else {
+          stopAmbient();
+        }
+      });
+
+      ambientAudio.addEventListener("error", () => {
+        setButtonState("unavailable");
+      });
+
+      previewAudios().forEach((audio) => {
+        audio.addEventListener("play", () => {
+          ambientAudio.pause();
+          if (localStorage.getItem(AMBIENT_KEY) === "active") {
+            setButtonState("inactive");
+          }
+        });
+
+        audio.addEventListener("pause", () => {
+          window.setTimeout(resumeAmbientIfEnabled, 220);
+        });
+
+        audio.addEventListener("ended", () => {
+          window.setTimeout(resumeAmbientIfEnabled, 220);
+        });
+      });
+
+      document.querySelectorAll('a[target="_blank"]').forEach((link) => {
+        link.addEventListener("click", () => {
+          ambientAudio.pause();
+        });
+      });
+
+      window.addEventListener("pagehide", () => {
+        ambientAudio.pause();
+      });
+
+      if (localStorage.getItem(AMBIENT_KEY) === "active") {
+        setButtonState("inactive");
+        window.setTimeout(startAmbient, 300);
+      } else {
+        setButtonState("inactive");
+      }
+    })();
+  </script>
 
 </body>
 </html>
