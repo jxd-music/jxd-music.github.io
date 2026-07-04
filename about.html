@@ -1697,17 +1697,22 @@
 
 
 
-  <script>
+    <script>
     (() => {
       const ambientAudio = document.getElementById("ambient-audio");
       const ambientButton = document.getElementById("ambient-signal");
       const ambientText = ambientButton?.querySelector(".ambient-signal-text");
       const AMBIENT_KEY = "jxdAmbientSignal";
+      const AMBIENT_POSITION_KEY = "jxdAmbientSignalPosition";
+      const AMBIENT_STAMP_KEY = "jxdAmbientSignalStamp";
       const AMBIENT_VOLUME = 0.10;
 
       if (!ambientAudio || !ambientButton || !ambientText) return;
 
       ambientAudio.volume = AMBIENT_VOLUME;
+
+      let externalNavigationPending = false;
+      let lastPositionSave = 0;
 
       function previewAudios() {
         return Array.from(document.querySelectorAll("audio:not([data-ambient-audio])"));
@@ -1720,6 +1725,8 @@
 
         if (state === "active") {
           ambientText.textContent = "Ambient Signal Active";
+        } else if (state === "resume") {
+          ambientText.textContent = "Resume Ambient Signal";
         } else if (state === "unavailable") {
           ambientText.textContent = "Ambient Signal Unavailable";
         } else {
@@ -1727,18 +1734,80 @@
         }
       }
 
-      async function startAmbient() {
+      function storeAmbientPosition({ withTimestamp = false } = {}) {
+        const currentTime = ambientAudio.currentTime || 0;
+        if (!Number.isFinite(currentTime)) return;
+
+        localStorage.setItem(AMBIENT_POSITION_KEY, currentTime.toString());
+
+        if (withTimestamp) {
+          localStorage.setItem(AMBIENT_STAMP_KEY, Date.now().toString());
+        } else {
+          localStorage.removeItem(AMBIENT_STAMP_KEY);
+        }
+      }
+
+      function getSavedAmbientPosition({ advanceAcrossNavigation = false } = {}) {
+        const savedPosition = Number(localStorage.getItem(AMBIENT_POSITION_KEY) || "0");
+        if (!Number.isFinite(savedPosition) || savedPosition < 0) return 0;
+
+        if (!advanceAcrossNavigation) return savedPosition;
+
+        const savedStamp = Number(localStorage.getItem(AMBIENT_STAMP_KEY) || "0");
+        const duration = ambientAudio.duration || 0;
+
+        if (!savedStamp || !duration) return savedPosition;
+
+        const elapsedSincePageChange = Math.max(0, (Date.now() - savedStamp) / 1000);
+        return (savedPosition + elapsedSincePageChange) % duration;
+      }
+
+      function applySavedAmbientPosition({ advanceAcrossNavigation = false } = {}) {
+        const targetPosition = getSavedAmbientPosition({ advanceAcrossNavigation });
+        if (!Number.isFinite(targetPosition) || targetPosition <= 0) return;
+
         try {
-          previewAudios().forEach((audio) => audio.pause());
+          const duration = ambientAudio.duration || 0;
+          ambientAudio.currentTime = duration ? Math.min(targetPosition, Math.max(duration - 0.2, 0)) : targetPosition;
+        } catch (error) {
+          // Some browsers reject currentTime before metadata is ready. The next start attempt will retry.
+        }
+      }
+
+      function waitForMetadata() {
+        if (ambientAudio.readyState >= 1) return Promise.resolve();
+
+        ambientAudio.load();
+
+        return new Promise((resolve) => {
+          const done = () => resolve();
+          ambientAudio.addEventListener("loadedmetadata", done, { once: true });
+          window.setTimeout(done, 900);
+        });
+      }
+
+      async function startAmbient({ restorePosition = true, advanceAcrossNavigation = false, pausePreviews = true } = {}) {
+        try {
+          if (pausePreviews) {
+            previewAudios().forEach((audio) => audio.pause());
+          }
+
+          if (restorePosition) {
+            await waitForMetadata();
+            applySavedAmbientPosition({ advanceAcrossNavigation });
+          }
+
           await ambientAudio.play();
           localStorage.setItem(AMBIENT_KEY, "active");
+          localStorage.removeItem(AMBIENT_STAMP_KEY);
           setButtonState("active");
         } catch (error) {
-          setButtonState(ambientAudio.error ? "unavailable" : "inactive");
+          setButtonState(ambientAudio.error ? "unavailable" : "resume");
         }
       }
 
       function stopAmbient({ remember = true } = {}) {
+        storeAmbientPosition({ withTimestamp: false });
         ambientAudio.pause();
         if (remember) localStorage.setItem(AMBIENT_KEY, "silent");
         setButtonState("inactive");
@@ -1747,14 +1816,15 @@
       function resumeAmbientIfEnabled() {
         const enabled = localStorage.getItem(AMBIENT_KEY) === "active";
         const anyPreviewPlaying = previewAudios().some((audio) => !audio.paused && !audio.ended);
+
         if (enabled && !anyPreviewPlaying) {
-          startAmbient();
+          startAmbient({ restorePosition: false, pausePreviews: false });
         }
       }
 
       ambientButton.addEventListener("click", () => {
         if (ambientAudio.paused) {
-          startAmbient();
+          startAmbient({ restorePosition: true, advanceAcrossNavigation: false });
         } else {
           stopAmbient();
         }
@@ -1764,11 +1834,20 @@
         setButtonState("unavailable");
       });
 
+      ambientAudio.addEventListener("timeupdate", () => {
+        const now = Date.now();
+        if (now - lastPositionSave > 1000) {
+          storeAmbientPosition({ withTimestamp: false });
+          lastPositionSave = now;
+        }
+      });
+
       previewAudios().forEach((audio) => {
         audio.addEventListener("play", () => {
+          storeAmbientPosition({ withTimestamp: false });
           ambientAudio.pause();
           if (localStorage.getItem(AMBIENT_KEY) === "active") {
-            setButtonState("inactive");
+            setButtonState("resume");
           }
         });
 
@@ -1781,19 +1860,41 @@
         });
       });
 
-      document.querySelectorAll('a[target="_blank"]').forEach((link) => {
+      document.querySelectorAll("a[href]").forEach((link) => {
+        const url = new URL(link.getAttribute("href"), window.location.href);
+        const isExternal = url.origin !== window.location.origin;
+
+        if (!isExternal) return;
+
         link.addEventListener("click", () => {
+          storeAmbientPosition({ withTimestamp: false });
           ambientAudio.pause();
+
+          if (link.target !== "_blank") {
+            externalNavigationPending = true;
+          } else {
+            window.setTimeout(() => {
+              externalNavigationPending = false;
+            }, 500);
+          }
         });
       });
 
       window.addEventListener("pagehide", () => {
+        const ambientEnabled = localStorage.getItem(AMBIENT_KEY) === "active";
+
+        if (ambientEnabled) {
+          storeAmbientPosition({ withTimestamp: !externalNavigationPending });
+        }
+
         ambientAudio.pause();
       });
 
       if (localStorage.getItem(AMBIENT_KEY) === "active") {
-        setButtonState("inactive");
-        window.setTimeout(startAmbient, 300);
+        setButtonState("resume");
+        window.setTimeout(() => {
+          startAmbient({ restorePosition: true, advanceAcrossNavigation: true });
+        }, 300);
       } else {
         setButtonState("inactive");
       }
