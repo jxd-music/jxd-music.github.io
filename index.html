@@ -641,6 +641,23 @@
       .hero-orbit {
         animation: mobileOrbitFloat 16s ease-in-out infinite;
       }
+
+
+      .hero-tags {
+        width: 100%;
+        max-width: 100%;
+        overflow: visible;
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
+
+      .hero-tag {
+        max-width: 100%;
+        white-space: normal;
+        line-height: 1.32;
+        overflow-wrap: normal;
+        word-break: normal;
+      }
     }
 
     @media (max-width: 420px) {
@@ -652,6 +669,13 @@
       .hero-copy p {
         font-size: 0.96rem;
         line-height: 1.62;
+      }
+
+
+      .hero-tag {
+        padding: 7px 9px;
+        font-size: 0.62rem;
+        letter-spacing: 0.025em;
       }
     }
 
