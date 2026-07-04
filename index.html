@@ -605,6 +605,56 @@
       }
     }
 
+
+    @keyframes mobileOrbitFloat {
+      0%, 100% {
+        transform: translateX(22%) translateY(-10%) scale(0.88) rotate(0deg);
+      }
+
+      50% {
+        transform: translateX(18%) translateY(-7%) scale(0.91) rotate(3deg);
+      }
+    }
+
+
+    @media (max-width: 760px) {
+      .eyebrow {
+        display: inline-block;
+        gap: 0;
+        white-space: nowrap;
+        font-size: 0.76rem;
+        letter-spacing: 0.13em;
+      }
+
+      .eyebrow::before,
+      .eyebrow::after {
+        display: none;
+      }
+
+      .hero-copy h1 {
+        max-width: 330px;
+        font-size: clamp(2.85rem, 14vw, 3.65rem);
+        line-height: 0.96;
+        letter-spacing: -0.055em;
+      }
+
+      .hero-orbit {
+        animation: mobileOrbitFloat 16s ease-in-out infinite;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hero-copy h1 {
+        max-width: 285px;
+        font-size: clamp(2.65rem, 13.5vw, 3.25rem);
+      }
+
+      .hero-copy p {
+        font-size: 0.96rem;
+        line-height: 1.62;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .orbit-haze,
       .orbit-layer-a,
@@ -612,7 +662,8 @@
       .orbit-layer-c,
       .orbit-core,
       .orbit-secondary,
-      .particle {
+      .particle,
+      .hero-orbit {
         animation: none;
       }
     }
@@ -631,6 +682,7 @@
       </a>
 
       <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html" aria-current="page">Home</a>
         <a href="music.html">Music</a>
         <a href="links.html">Links</a>
         <a href="about.html">About</a>
