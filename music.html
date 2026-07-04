@@ -871,6 +871,215 @@
       margin-bottom: 14px;
     }
 
+
+    .preview-body audio {
+      display: none;
+    }
+
+    .retro-player {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      width: 100%;
+      margin: 0 0 14px;
+      padding: 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(137, 212, 255, 0.18);
+      background:
+        radial-gradient(circle at 18% 12%, rgba(93, 183, 255, 0.18), transparent 28%),
+        radial-gradient(circle at 88% 18%, rgba(190, 70, 255, 0.14), transparent 26%),
+        linear-gradient(180deg, rgba(48, 57, 84, 0.92) 0%, rgba(18, 24, 42, 0.96) 38%, rgba(5, 8, 16, 0.98) 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        inset 0 -18px 34px rgba(0, 0, 0, 0.34),
+        0 16px 38px rgba(0, 0, 0, 0.24);
+    }
+
+    .retro-player::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 100% 4px, 4px 100%;
+      opacity: 0.28;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .retro-player::after {
+      content: "";
+      position: absolute;
+      inset: auto -20% -44% 20%;
+      height: 70%;
+      background: radial-gradient(circle at center, rgba(255, 80, 170, 0.14), transparent 64%);
+      filter: blur(28px);
+      opacity: 0.9;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .retro-display,
+    .retro-main,
+    .retro-eq {
+      position: relative;
+      z-index: 1;
+    }
+
+    .retro-display {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 38px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(137, 212, 255, 0.16);
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.28)),
+        rgba(2, 7, 14, 0.72);
+      box-shadow:
+        inset 0 0 18px rgba(93, 183, 255, 0.08),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+      font-family: "Courier New", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .retro-led {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex: 0 0 auto;
+      background: rgba(126, 138, 167, 0.7);
+      box-shadow: 0 0 0 rgba(137, 212, 255, 0);
+    }
+
+    .retro-player.is-playing .retro-led {
+      background: var(--success);
+      box-shadow: 0 0 12px rgba(159, 255, 208, 0.7);
+    }
+
+    .retro-title {
+      min-width: 0;
+      overflow: hidden;
+      color: rgba(159, 255, 208, 0.92);
+      font-size: 0.84rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-shadow: 0 0 8px rgba(159, 255, 208, 0.28);
+    }
+
+    .retro-time {
+      margin-left: auto;
+      flex: 0 0 auto;
+      color: var(--accent-3);
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-shadow: 0 0 8px rgba(137, 212, 255, 0.32);
+    }
+
+    .retro-main {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .retro-play {
+      width: 48px;
+      height: 42px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 12px;
+      color: #07111e;
+      background:
+        linear-gradient(180deg, rgba(244, 247, 255, 0.92), rgba(125, 134, 255, 0.78)),
+        linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.65),
+        inset 0 -8px 14px rgba(0, 0, 0, 0.14),
+        0 10px 22px rgba(93, 183, 255, 0.15);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 900;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .retro-play:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.72),
+        inset 0 -8px 14px rgba(0, 0, 0, 0.12),
+        0 14px 28px rgba(93, 183, 255, 0.22);
+    }
+
+    .retro-progress {
+      position: relative;
+      height: 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.52), rgba(255, 255, 255, 0.035)),
+        rgba(0, 0, 0, 0.34);
+      box-shadow:
+        inset 0 2px 8px rgba(0, 0, 0, 0.52),
+        0 1px 0 rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .retro-progress-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background:
+        linear-gradient(90deg, rgba(125, 134, 255, 0.96), rgba(93, 183, 255, 0.96), rgba(255, 80, 170, 0.78));
+      box-shadow:
+        0 0 16px rgba(93, 183, 255, 0.32),
+        0 0 24px rgba(255, 80, 170, 0.18);
+      transition: width 0.12s linear;
+    }
+
+    .retro-eq {
+      display: grid;
+      grid-template-columns: repeat(18, 1fr);
+      gap: 3px;
+      height: 22px;
+      align-items: end;
+      margin-top: 10px;
+      padding: 0 2px;
+    }
+
+    .retro-bar {
+      display: block;
+      height: 25%;
+      min-height: 3px;
+      border-radius: 2px 2px 0 0;
+      background: linear-gradient(180deg, rgba(159, 255, 208, 0.92), rgba(137, 212, 255, 0.72), rgba(125, 134, 255, 0.52));
+      opacity: 0.36;
+      transform-origin: bottom;
+    }
+
+    .retro-player.is-playing .retro-bar {
+      animation: retroEqPulse 0.72s ease-in-out infinite alternate;
+      opacity: 0.76;
+    }
+
+    .retro-player.is-playing .retro-bar:nth-child(2n) { animation-duration: 0.52s; }
+    .retro-player.is-playing .retro-bar:nth-child(3n) { animation-duration: 0.84s; }
+    .retro-player.is-playing .retro-bar:nth-child(4n) { animation-duration: 0.64s; }
+
+    @keyframes retroEqPulse {
+      from { height: 18%; }
+      to { height: 100%; }
+    }
+
+    .mobile-soundworld-return {
+      display: none;
+    }
+
     .smartlink-button {
       position: relative;
       display: flex;
@@ -1472,6 +1681,76 @@
       }
     }
 
+
+    @media (max-width: 760px) {
+      .genre-card {
+        scroll-margin-top: 132px;
+      }
+
+      .genre-panel {
+        scroll-margin-top: 132px;
+      }
+
+      .music-idle-panel {
+        min-height: 250px;
+        padding: 30px 20px;
+      }
+
+      .music-idle-content h3 {
+        font-size: clamp(2rem, 11vw, 3rem);
+      }
+
+      .mobile-soundworld-return {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        width: 100%;
+        margin: 0 0 16px;
+        padding: 0 16px;
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(137, 212, 255, 0.18);
+        background: rgba(137, 212, 255, 0.06);
+        color: var(--accent-3);
+        font: inherit;
+        font-size: 0.88rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .retro-player {
+        border-radius: 16px;
+        padding: 10px;
+      }
+
+      .retro-display {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .retro-time {
+        margin-left: 0;
+      }
+
+      .retro-main {
+        grid-template-columns: 44px minmax(0, 1fr);
+        gap: 10px;
+      }
+
+      .retro-play {
+        width: 44px;
+      }
+
+      .retro-eq {
+        grid-template-columns: repeat(14, 1fr);
+      }
+
+      .retro-bar:nth-child(n+15) {
+        display: none;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .orbit-haze,
       .orbit-layer-a,
@@ -1482,7 +1761,8 @@
       .particle,
       .music-idle-panel::before,
       .music-idle-panel::after,
-      .genre-panel.is-active {
+      .genre-panel.is-active,
+      .retro-player.is-playing .retro-bar {
         animation: none;
       }
     }
@@ -1501,6 +1781,7 @@
       </a>
 
       <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
         <a href="music.html" aria-current="page">Music</a>
         <a href="links.html">Links</a>
         <a href="about.html">About</a>
@@ -1606,7 +1887,7 @@
                   <h4>Time Moves Through Us</h4>
                   <p class="preview-meta">Cinematic Electronica · from the album Echos of Time</p>
     
-                  <audio controls preload="metadata" src="audio/electronica-xpop/preview-time-moves-through-us.mp3">
+                  <audio class="preview-audio" preload="metadata" src="audio/electronica-xpop/preview-time-moves-through-us.mp3">
                     Your browser does not support the audio element.
                   </audio>
     
@@ -1627,7 +1908,7 @@
                     Uplifting Electronica · from the release From the Beach Till the Mountain · EP / Extended Play
                   </p>
     
-                  <audio controls preload="metadata" src="audio/electronica-xpop/preview-from-the-beach-till-the-mountain.mp3">
+                  <audio class="preview-audio" preload="metadata" src="audio/electronica-xpop/preview-from-the-beach-till-the-mountain.mp3">
                     Your browser does not support the audio element.
                   </audio>
     
@@ -1648,7 +1929,7 @@
                     X-Pop / Electronica · from the release Surrender · EP / Extended Play
                   </p>
     
-                  <audio controls preload="metadata" src="audio/electronica-xpop/preview-surrender.mp3">
+                  <audio class="preview-audio" preload="metadata" src="audio/electronica-xpop/preview-surrender.mp3">
                     Your browser does not support the audio element.
                   </audio>
     
@@ -1688,7 +1969,7 @@
                   <h4>Pressure Field</h4>
                   <p class="preview-meta">Hypnotic Techno · Single</p>
     
-                  <audio controls preload="metadata" src="audio/hypnotic-techno/preview-pressure-field.mp3">
+                  <audio class="preview-audio" preload="metadata" src="audio/hypnotic-techno/preview-pressure-field.mp3">
                     Your browser does not support the audio element.
                   </audio>
     
@@ -1707,7 +1988,7 @@
                   <h4>Rhythm Core</h4>
                   <p class="preview-meta">Hypnotic Techno · Extended Mix · Single</p>
     
-                  <audio controls preload="metadata" src="audio/hypnotic-techno/preview-rhythm-core.mp3">
+                  <audio class="preview-audio" preload="metadata" src="audio/hypnotic-techno/preview-rhythm-core.mp3">
                     Your browser does not support the audio element.
                   </audio>
     
@@ -1726,7 +2007,7 @@
                   <h4>Threshold Wave</h4>
                   <p class="preview-meta">Hypnotic Techno · Extended Mix · Single</p>
     
-                  <audio controls preload="metadata" src="audio/hypnotic-techno/preview-threshold-wave.mp3">
+                  <audio class="preview-audio" preload="metadata" src="audio/hypnotic-techno/preview-threshold-wave.mp3">
                     Your browser does not support the audio element.
                   </audio>
     
@@ -1812,8 +2093,141 @@
     const audioPlayers = document.querySelectorAll("audio");
     const musicRevealStage = document.getElementById("music-reveal-stage");
 
+    function formatTime(seconds) {
+      if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
+      const minutes = Math.floor(seconds / 60);
+      const remainingSeconds = Math.floor(seconds % 60).toString().padStart(2, "0");
+      return `${minutes}:${remainingSeconds}`;
+    }
+
+    function createRetroPlayers() {
+      audioPlayers.forEach((audio) => {
+        const previewBody = audio.closest(".preview-body");
+        if (!previewBody || previewBody.querySelector(".retro-player")) return;
+
+        const title = previewBody.querySelector("h4")?.textContent?.trim() || "JXD Preview";
+        const player = document.createElement("div");
+        player.className = "retro-player";
+        player.innerHTML = `
+          <div class="retro-display">
+            <span class="retro-led" aria-hidden="true"></span>
+            <span class="retro-title">${title}</span>
+            <span class="retro-time">0:00 / 0:00</span>
+          </div>
+          <div class="retro-main">
+            <button class="retro-play" type="button" aria-label="Play ${title}">▶</button>
+            <div class="retro-progress" role="slider" aria-label="${title} progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+              <div class="retro-progress-fill"></div>
+            </div>
+          </div>
+          <div class="retro-eq" aria-hidden="true">
+            ${Array.from({ length: 18 }, () => "<span class='retro-bar'></span>").join("")}
+          </div>
+        `;
+
+        audio.insertAdjacentElement("afterend", player);
+
+        const playButton = player.querySelector(".retro-play");
+        const progress = player.querySelector(".retro-progress");
+        const progressFill = player.querySelector(".retro-progress-fill");
+        const timeDisplay = player.querySelector(".retro-time");
+
+        function updateTime() {
+          const duration = audio.duration || 0;
+          const current = audio.currentTime || 0;
+          const percent = duration ? Math.min((current / duration) * 100, 100) : 0;
+
+          progressFill.style.width = `${percent}%`;
+          timeDisplay.textContent = `${formatTime(current)} / ${formatTime(duration)}`;
+          progress.setAttribute("aria-valuenow", Math.round(percent).toString());
+        }
+
+        function seek(event) {
+          const duration = audio.duration || 0;
+          if (!duration) return;
+
+          const rect = progress.getBoundingClientRect();
+          const clientX = event.touches ? event.touches[0].clientX : event.clientX;
+          const ratio = Math.min(Math.max((clientX - rect.left) / rect.width, 0), 1);
+          audio.currentTime = ratio * duration;
+          updateTime();
+        }
+
+        playButton.addEventListener("click", () => {
+          if (audio.paused) {
+            audio.play();
+          } else {
+            audio.pause();
+          }
+        });
+
+        progress.addEventListener("click", seek);
+        progress.addEventListener("keydown", (event) => {
+          const duration = audio.duration || 0;
+          if (!duration) return;
+
+          if (event.key === "ArrowRight" || event.key === "ArrowUp") {
+            event.preventDefault();
+            audio.currentTime = Math.min(audio.currentTime + 5, duration);
+          }
+
+          if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
+            event.preventDefault();
+            audio.currentTime = Math.max(audio.currentTime - 5, 0);
+          }
+        });
+
+        audio.addEventListener("loadedmetadata", updateTime);
+        audio.addEventListener("timeupdate", updateTime);
+
+        audio.addEventListener("play", () => {
+          player.classList.add("is-playing");
+          playButton.textContent = "❚❚";
+          playButton.setAttribute("aria-label", `Pause ${title}`);
+        });
+
+        audio.addEventListener("pause", () => {
+          player.classList.remove("is-playing");
+          playButton.textContent = "▶";
+          playButton.setAttribute("aria-label", `Play ${title}`);
+        });
+
+        audio.addEventListener("ended", () => {
+          player.classList.remove("is-playing");
+          playButton.textContent = "▶";
+          audio.currentTime = 0;
+          updateTime();
+        });
+
+        updateTime();
+      });
+    }
+
+    function addMobileReturnButtons() {
+      genrePanels.forEach((panel) => {
+        if (panel.querySelector(".mobile-soundworld-return")) return;
+
+        const button = document.createElement("button");
+        button.className = "mobile-soundworld-return";
+        button.type = "button";
+        button.textContent = "Choose another sound world ↑";
+        button.addEventListener("click", () => {
+          const grid = document.querySelector(".genre-grid");
+          if (grid) {
+            grid.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+          }
+        });
+
+        panel.insertBefore(button, panel.firstChild);
+      });
+    }
+
     function activatePanel(panelId) {
       const selectedPanel = document.getElementById(panelId);
+      const selectedCard = document.querySelector(`.genre-card[data-panel="${panelId}"]`);
 
       if (musicRevealStage) {
         musicRevealStage.classList.add("has-selection");
@@ -1839,11 +2253,18 @@
 
       if (selectedPanel && window.matchMedia("(max-width: 760px)").matches) {
         window.setTimeout(() => {
-          selectedPanel.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
+          const header = document.querySelector(".site-header");
+          const headerHeight = header ? header.getBoundingClientRect().height : 0;
+          const panelTop = selectedPanel.getBoundingClientRect().top + window.scrollY;
+          const targetTop = Math.max(0, panelTop - headerHeight - 220);
+
+          window.scrollTo({
+            top: targetTop,
+            behavior: "smooth"
           });
-        }, 180);
+        }, 220);
+      } else if (selectedCard) {
+        selectedCard.blur();
       }
     }
 
@@ -1860,6 +2281,9 @@
         });
       });
     });
+
+    createRetroPlayers();
+    addMobileReturnButtons();
   </script>
 </body>
 </html>
