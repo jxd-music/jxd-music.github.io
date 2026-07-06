@@ -1113,6 +1113,17 @@
         rgba(255, 255, 255, 0.03);
     }
 
+    .smartlink-button.is-disabled,
+    .smartlink-button.is-disabled:hover {
+      cursor: default;
+      opacity: 0.72;
+      transform: none;
+      border-color: rgba(255, 255, 255, 0.10);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02)),
+        rgba(255, 255, 255, 0.015);
+    }
+
     .smartlink-eyebrow {
       color: var(--accent-3);
       font-size: 0.72rem;
@@ -2205,27 +2216,77 @@
               <div>
                 <h3>Melodic Techno</h3>
                 <p>
-                  Atmospheric techno previews with melodic tension and emotional movement will be added here.
+                  Selected previews from the atmospheric, melodic and industrial side of JXD Music.
                 </p>
               </div>
-    
-              <a class="button button-secondary" href="links.html">Official Artist Profiles</a>
-            </div>
-    
-            <div class="placeholder-grid">
-              <div class="placeholder-card">
-                <strong>Preview Slot 01</strong>
-                <span>Melodic techno preview will be added here.</span>
-              </div>
-              <div class="placeholder-card">
-                <strong>Preview Slot 02</strong>
-                <span>Atmospheric club track example.</span>
-              </div>
-              <div class="placeholder-card">
-                <strong>Preview Slot 03</strong>
-                <span>Optional emotional techno track.</span>
+
+              <div class="panel-note">
+                Use the release smartlinks below for track-specific platforms.
               </div>
             </div>
+
+            <div class="preview-list">
+              <article class="preview-card">
+                <img class="preview-cover" src="covers/melodic-techno/cover-aligned-motion.jpg" alt="Aligned Motion cover" />
+
+                <div class="preview-body">
+                  <h4>Aligned Motion</h4>
+                  <p class="preview-meta">Melodic Techno · Cinematic Pulse · from the album Residual Motion</p>
+
+                  <audio class="preview-audio" preload="metadata" src="audio/melodic-techno/preview-aligned-motion.mp3">
+                    Your browser does not support the audio element.
+                  </audio>
+
+                  <a class="smartlink-button" href="releases/aligned-motion.html">
+                    <span class="smartlink-eyebrow">Release links</span>
+                    <span class="smartlink-title">Open JXD Smartlink</span>
+                    <span class="smartlink-arrow" aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </article>
+
+              <article class="preview-card">
+                <img class="preview-cover" src="covers/melodic-techno/cover-das-experiment.jpg" alt="Das Experiment cover" />
+
+                <div class="preview-body">
+                  <h4>Das Experiment</h4>
+                  <p class="preview-meta">Dark Melodic Techno · Driving Night Energy · Single</p>
+
+                  <audio class="preview-audio" preload="metadata" src="audio/melodic-techno/preview-das-experiment.mp3">
+                    Your browser does not support the audio element.
+                  </audio>
+
+                  <a class="smartlink-button" href="releases/das-experiment.html">
+                    <span class="smartlink-eyebrow">Release links</span>
+                    <span class="smartlink-title">Open JXD Smartlink</span>
+                    <span class="smartlink-arrow" aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </article>
+
+              <article class="preview-card">
+                <img class="preview-cover" src="covers/melodic-techno/cover-melodic-code-1-1.jpg" alt="Melodic Code 1.1 cover" />
+
+                <div class="preview-body">
+                  <h4>Melodic Code 1.1</h4>
+                  <p class="preview-meta">Melodic Techno · Industrial Code Atmosphere · Single</p>
+
+                  <audio class="preview-audio" preload="metadata" src="audio/melodic-techno/preview-melodic-code-1-1.mp3">
+                    Your browser does not support the audio element.
+                  </audio>
+
+                  <a class="smartlink-button" href="releases/melodic-code-1-1.html">
+                    <span class="smartlink-eyebrow">Release links</span>
+                    <span class="smartlink-title">Open JXD Smartlink</span>
+                    <span class="smartlink-arrow" aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </article>
+            </div>
+
+            <p class="panel-footer-note">
+              Preview the sound here. Open each JXD Smartlink for full streaming, video and shop options.
+            </p>
           </div>
     
           <div id="panel-coming" class="genre-panel" aria-hidden="true">
@@ -2233,27 +2294,77 @@
               <div>
                 <h3>Coming Soon</h3>
                 <p>
-                  Upcoming tracks, unreleased previews and future JXD releases will appear here.
+                  Upcoming previews from the next JXD directions: industrial techno, X-Pop and hypnotic techno.
                 </p>
               </div>
-    
-              <a class="button button-secondary" href="links.html">Follow JXD</a>
-            </div>
-    
-            <div class="placeholder-grid">
-              <div class="placeholder-card">
-                <strong>Title TBA</strong>
-                <span>Upcoming release information will appear here.</span>
-              </div>
-              <div class="placeholder-card">
-                <strong>Preview soon</strong>
-                <span>Short unreleased audio teasers can be added later.</span>
-              </div>
-              <div class="placeholder-card">
-                <strong>Release date TBA</strong>
-                <span>This section can be updated when a release is scheduled.</span>
+
+              <div class="panel-note">
+                Smartlinks will be added after release scheduling.
               </div>
             </div>
+
+            <div class="preview-list">
+              <article class="preview-card">
+                <img class="preview-cover" src="covers/coming-soon/cover-iron-pulse.jpg" alt="Iron Pulse cover" />
+
+                <div class="preview-body">
+                  <h4>Iron Pulse</h4>
+                  <p class="preview-meta">Dark / Atmospheric Industrial Techno · 128 BPM · Upcoming</p>
+
+                  <audio class="preview-audio" preload="metadata" src="audio/coming-soon/preview-iron-pulse.mp3">
+                    Your browser does not support the audio element.
+                  </audio>
+
+                  <span class="smartlink-button is-disabled" aria-disabled="true">
+                    <span class="smartlink-eyebrow">Coming soon</span>
+                    <span class="smartlink-title">Release links pending</span>
+                    <span class="smartlink-arrow" aria-hidden="true">…</span>
+                  </span>
+                </div>
+              </article>
+
+              <article class="preview-card">
+                <img class="preview-cover" src="covers/coming-soon/cover-somewhere-in-the-silence.jpg" alt="Somewhere in the Silence cover" />
+
+                <div class="preview-body">
+                  <h4>Somewhere in the Silence</h4>
+                  <p class="preview-meta">X-Pop · 80s Synths &amp; Classical Instruments · Upcoming</p>
+
+                  <audio class="preview-audio" preload="metadata" src="audio/coming-soon/preview-somewhere-in-the-silence.mp3">
+                    Your browser does not support the audio element.
+                  </audio>
+
+                  <span class="smartlink-button is-disabled" aria-disabled="true">
+                    <span class="smartlink-eyebrow">Coming soon</span>
+                    <span class="smartlink-title">Release links pending</span>
+                    <span class="smartlink-arrow" aria-hidden="true">…</span>
+                  </span>
+                </div>
+              </article>
+
+              <article class="preview-card">
+                <img class="preview-cover" src="covers/coming-soon/cover-somatic-drift.jpg" alt="Somatic Drift cover" />
+
+                <div class="preview-body">
+                  <h4>Somatic Drift</h4>
+                  <p class="preview-meta">Hypnotic Techno · 135 BPM · Upcoming</p>
+
+                  <audio class="preview-audio" preload="metadata" src="audio/coming-soon/preview-somatic-drift.mp3">
+                    Your browser does not support the audio element.
+                  </audio>
+
+                  <span class="smartlink-button is-disabled" aria-disabled="true">
+                    <span class="smartlink-eyebrow">Coming soon</span>
+                    <span class="smartlink-title">Release links pending</span>
+                    <span class="smartlink-arrow" aria-hidden="true">…</span>
+                  </span>
+                </div>
+              </article>
+            </div>
+
+            <p class="panel-footer-note">
+              Upcoming previews are not final release smartlinks yet. Platform links can be added after scheduling or distribution.
+            </p>
           </div>
           </div>
         </section>
@@ -2545,9 +2656,18 @@
         ambientAudio.load();
 
         return new Promise((resolve) => {
-          const done = () => resolve();
+          let resolved = false;
+
+          const done = () => {
+            if (resolved) return;
+            resolved = true;
+            resolve();
+          };
+
           ambientAudio.addEventListener("loadedmetadata", done, { once: true });
-          window.setTimeout(done, 900);
+          ambientAudio.addEventListener("canplay", done, { once: true });
+
+          window.setTimeout(done, 3500);
         });
       }
 
@@ -2563,8 +2683,17 @@
           }
 
           await ambientAudio.play();
+
+          if (restorePosition) {
+            window.setTimeout(() => {
+              applySavedAmbientPosition({ advanceAcrossNavigation });
+              localStorage.removeItem(AMBIENT_STAMP_KEY);
+            }, 180);
+          } else {
+            localStorage.removeItem(AMBIENT_STAMP_KEY);
+          }
+
           localStorage.setItem(AMBIENT_KEY, "active");
-          localStorage.removeItem(AMBIENT_STAMP_KEY);
           setButtonState("active");
         } catch (error) {
           setButtonState(ambientAudio.error ? "unavailable" : "resume");
