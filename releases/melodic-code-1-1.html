@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Melodic Code 1.1 | JXD Music</title>
+  <meta
+    name="description"
+    content="Official JXD Music smartlink for Melodic Code 1.1."
+  />
+
+  <style>
+
+    :root {
+      --bg-1: #02050b;
+      --bg-2: #07101b;
+      --panel: rgba(255, 255, 255, 0.07);
+      --border: rgba(255, 255, 255, 0.14);
+      --border-strong: rgba(255, 255, 255, 0.22);
+      --text: #f4f7ff;
+      --muted: #b3bfd8;
+      --soft: #7e8aa7;
+      --accent: #7d86ff;
+      --accent-2: #5db7ff;
+      --accent-3: #89d4ff;
+      --radius-sm: 999px;
+      --max-width: 1120px;
+      --shadow: rgba(0, 0, 0, 0.42);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 18%, rgba(93, 183, 255, 0.12), transparent 24%),
+        radial-gradient(circle at 82% 14%, rgba(125, 134, 255, 0.12), transparent 28%),
+        radial-gradient(circle at 25% 72%, rgba(255, 130, 55, 0.10), transparent 22%),
+        linear-gradient(135deg, var(--bg-1) 0%, #020811 24%, var(--bg-2) 58%, #04101a 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(circle at center, black 0%, transparent 74%);
+      opacity: 0.32;
+      pointer-events: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(var(--max-width), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to bottom, rgba(2, 6, 12, 0.92), rgba(2, 6, 12, 0.78));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .site-header-inner {
+      width: min(var(--max-width), calc(100% - 40px));
+      margin: 0 auto;
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.34));
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: 1.12rem;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-copy span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .main-nav a {
+      color: var(--muted);
+      font-size: 0.94rem;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+    }
+
+    .main-nav a:hover,
+    .main-nav a[aria-current="page"] {
+      color: var(--text);
+      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .release {
+      min-height: calc(100vh - 82px);
+      padding: 74px 0 54px;
+      display: grid;
+      align-items: center;
+    }
+
+    .release-panel {
+      display: grid;
+      grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+      gap: 34px;
+      align-items: center;
+      padding: 34px;
+      border: 1px solid var(--border);
+      border-radius: 38px;
+      background:
+        radial-gradient(circle at 18% 26%, rgba(255, 130, 55, 0.12), transparent 30%),
+        radial-gradient(circle at 80% 34%, rgba(93, 183, 255, 0.105), transparent 28%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+        rgba(2, 7, 14, 0.66);
+      box-shadow: 0 34px 110px var(--shadow);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+    }
+
+    .cover-card {
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 30px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+        rgba(0, 0, 0, 0.22);
+      box-shadow: 0 22px 58px rgba(0, 0, 0, 0.28);
+    }
+
+    .cover-card img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 22px 46px rgba(0, 0, 0, 0.34);
+    }
+
+    .release-copy {
+      min-width: 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(137, 212, 255, 0.18);
+      background: rgba(137, 212, 255, 0.06);
+      color: var(--accent-3);
+      font-size: 0.76rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      line-height: 0.92;
+      letter-spacing: -0.07em;
+      margin-bottom: 16px;
+    }
+
+    .release-meta {
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.7;
+      margin-bottom: 18px;
+      max-width: 720px;
+    }
+
+    .release-description {
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.75;
+      max-width: 740px;
+      margin-bottom: 22px;
+    }
+
+    .audio-box {
+      margin: 18px 0 24px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 24px;
+      background: rgba(0, 0, 0, 0.24);
+    }
+
+    .audio-box span {
+      display: block;
+      color: var(--accent-3);
+      font-size: 0.74rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    audio {
+      width: 100%;
+      display: block;
+    }
+
+    .link-section {
+      margin-top: 24px;
+    }
+
+    .link-section h2 {
+      font-size: 1.2rem;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .platform-link {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 76px;
+      padding: 14px 48px 14px 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)),
+        rgba(0, 0, 0, 0.22);
+      transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+    }
+
+    .platform-link:hover {
+      transform: translateY(-1px);
+      border-color: rgba(137, 212, 255, 0.34);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.035)),
+        rgba(0, 0, 0, 0.25);
+    }
+
+    .platform-type {
+      color: var(--accent-3);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .platform-name {
+      color: var(--text);
+      font-size: 1.02rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .platform-arrow {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent-3);
+      font-size: 1.1rem;
+    }
+
+    .footer {
+      padding: 0 0 42px;
+      color: var(--soft);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @media (max-width: 920px) {
+      .site-header-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 16px 0;
+      }
+
+      .release {
+        min-height: auto;
+        padding: 42px 0 42px;
+      }
+
+      .release-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .cover-card {
+        max-width: 420px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page,
+      .site-header-inner {
+        width: min(100% - 24px, var(--max-width));
+      }
+
+      .release-panel {
+        padding: 20px;
+        border-radius: 30px;
+      }
+
+      .platform-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .main-nav {
+        gap: 6px;
+      }
+
+      .main-nav a {
+        padding: 8px 10px;
+        font-size: 0.88rem;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="../index.html" aria-label="JXD Music home">
+        <img class="brand-logo" src="../jxd-logo.png" alt="JXD Music logo" />
+        <span class="brand-copy">
+          <strong>JXD Music</strong>
+          <span>Official Artist Website</span>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="../index.html">Home</a>
+        <a href="../music.html">Music</a>
+        <a href="../links.html">Links</a>
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="release" aria-label="Release smartlink">
+      <article class="release-panel">
+        <div class="cover-card">
+          <img src="../covers/melodic-techno/cover-melodic-code-1-1.jpg" alt="Melodic Code 1.1 cover artwork" />
+        </div>
+
+        <div class="release-copy">
+          <span class="eyebrow">Melodic Techno · Single</span>
+
+          <h1>Melodic Code 1.1</h1>
+
+          <p class="release-meta">by JXD</p>
+
+          <p class="release-description">
+            An industrial, coded melodic techno single built from stark monochrome tension, hypnotic repetition and precise electronic motion.
+          </p>
+
+          <div class="audio-box">
+            <span>Preview</span>
+            <audio controls preload="metadata" src="../audio/melodic-techno/preview-melodic-code-1-1.mp3">
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+
+          <div class="link-section">
+            <h2>Listen, watch or buy</h2>
+
+            <div class="platform-grid">
+              <a class="platform-link" href="https://open.spotify.com/intl-de/album/4RJoi95ceqF1FmdYYGmq3r?si=AuE5GIzuRtaIySVJNI8euA" target="_blank" rel="noopener noreferrer">
+                <span class="platform-type">Stream</span>
+                <span class="platform-name">Spotify</span>
+                <span class="platform-arrow" aria-hidden="true">↗</span>
+              </a>
+              <a class="platform-link" href="https://music.apple.com/us/song/melodic-code-1-1/1760518125" target="_blank" rel="noopener noreferrer">
+                <span class="platform-type">Stream</span>
+                <span class="platform-name">Apple Music / iTunes</span>
+                <span class="platform-arrow" aria-hidden="true">↗</span>
+              </a>
+              <a class="platform-link" href="https://music.amazon.in/albums/B0DBVNDCXS" target="_blank" rel="noopener noreferrer">
+                <span class="platform-type">Stream</span>
+                <span class="platform-name">Amazon Music</span>
+                <span class="platform-arrow" aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © 2026 JXD Music · Official release smartlink
+  </footer>
+</body>
+</html>
